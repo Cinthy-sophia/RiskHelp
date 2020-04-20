@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">RiskHelp</string>
+    <string name="emergency">Emergency</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log In</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
+    <string name="email_address">Email address</string>
+    <string name="telephone" translatable="false">Telephone</string>
+    <string name="password">Password</string>
+    <string name="sign_up_message">You need to register first before you can start, so tell us about yourself!</string>
+
 </resources>

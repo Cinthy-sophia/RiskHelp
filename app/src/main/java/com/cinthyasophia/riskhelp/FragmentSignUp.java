@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-public class FragmentLogIn extends Fragment {
+public class FragmentSignUp extends Fragment {
     private TextInputEditText tfCorreoE;
     private TextInputEditText tfPassword;
     private Button bIngresar;

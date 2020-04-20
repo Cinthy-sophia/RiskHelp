@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivIcono"
             android:layout_width="362dp"
             android:layout_height="289dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -22,25 +22,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.14"
-            app:srcCompat="@drawable/RiskHelp" />
+            app:srcCompat="@drawable/risk_help" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="366dp"
-            android:layout_height="79dp"
-            android:hint="Indica tu nombre"
+        <Button
+            android:id="@+id/bEmergencia"
+            android:layout_width="208dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="272dp"
+            android:text="@string/emergency"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivIcono"
+            app:layout_constraintVertical_bias="0.891" />
+
+        <Button
+            android:id="@+id/bRegistrarse"
+            android:layout_width="210dp"
+            android:layout_height="62dp"
+            android:text="@string/sign_up"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bEmergencia"
+            app:layout_constraintVertical_bias="0.205" />
+
+        <Button
+            android:id="@+id/bIniciarSesion"
+            android:layout_width="210dp"
+            android:layout_height="62dp"
+            android:text="@string/log_in"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.613">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/bRegistrarse"
+            app:layout_constraintVertical_bias="0.413" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">RiskHelp</string>
+    <string name="sign_up">Registrarme</string>
+    <string name="log_in">Iniciar Sesion</string>
+    <string name="emergency">Emergencia</string>
+    <string name="enter_your_email_address">Indica tu correo electrónico</string>
+    <string name="enter_your_password">Indica tu contraseña</string>
+    <string name="name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="email_address">Correo Electronico</string>
+    <string name="telephone">Telefono</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_up_message">Es necesario que te registres primero antes de comenzar, ¡Cuéntanos sobre ti!</string>
+</resources>
