@@ -20,11 +20,9 @@ public class FragmentSignUp extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        tfCorreoE = container.findViewById(R.id.tfCorreoE);
-        tfPassword = container.findViewById(R.id.tfPassword);
-        bIngresar = container.findViewById(R.id.bIngresar);
 
-        bIngresar.setOnClickListener(new View.OnClickListener() {
+
+        /**bIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 correo = String.valueOf(tfCorreoE.getText());
@@ -34,7 +32,7 @@ public class FragmentSignUp extends Fragment {
 
 
             }
-        });
+        });**/
         return inflater.inflate(R.layout.fragment_sign_up,container,false);
     }
 
