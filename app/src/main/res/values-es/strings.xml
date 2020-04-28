@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RiskHelp</string>
-    <string name="sign_up">Registrarme</string>
+    <string name="sign_up">Registrarse</string>
     <string name="log_in">Iniciar Sesion</string>
     <string name="emergency">Emergencia</string>
     <string name="enter_your_email_address">Indica tu correo electrónico</string>
@@ -9,7 +9,14 @@
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="email_address">Correo Electronico</string>
-    <string name="telephone">Telefono</string>
+    <string name="telephone">Teléfono</string>
     <string name="password">Contraseña</string>
     <string name="sign_up_message">Es necesario que te registres primero antes de comenzar, ¡Cuéntanos sobre ti!</string>
+    <string name="next">Siguiente</string>
+    <string name="app_slogan">CONECTA, AVISA, AYUDA</string>
+    <string name="log_in_message">"¡Regresaste! ¡Es genial verte de nuevo! "</string>
+    <string name="volunteer_message">¿Eres un voluntario?</string>
+    <string name="postal_code">Codigo Postal</string>
+    <string name="yes">Si</string>
+    <string name="emergency_message">Puedes usar el botón de emergencia para enviar una alerta inmediata.</string>
 </resources>

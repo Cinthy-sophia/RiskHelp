@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- turquesa #008577
+     rojo principal fuerte #970c10-->
+<!--#CEFF1A1A -> color rojo bonito-->
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#970c10</color>
+    <color name="colorPrimary">#CEFF1A1A</color>
+    <color name="colorPrimaryDark">#970c10</color>
+    <color name="colorAccent">#FB4040</color>
 </resources>

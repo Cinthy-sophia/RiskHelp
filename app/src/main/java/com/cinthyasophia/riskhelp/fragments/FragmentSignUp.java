@@ -1,4 +1,4 @@
-package com.cinthyasophia.riskhelp;
+package com.cinthyasophia.riskhelp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cinthyasophia.riskhelp.DialogoVoluntario;
+import com.cinthyasophia.riskhelp.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class FragmentSignUp extends Fragment {
-    private TextInputEditText tfCorreoE;
+    private TextInputEditText tfName;
     private TextInputEditText tfPassword;
-    private Button bIngresar;
+    private Button bSiguiente;
     private String correo;
     private String password;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
         /**bIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,5 +40,13 @@ public class FragmentSignUp extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        bSiguiente = getView().findViewById(R.id.bSiguiente);
+        bSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoVoluntario dialogoVoluntario = new DialogoVoluntario();
+                dialogoVoluntario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+            }
+        });
     }
 }

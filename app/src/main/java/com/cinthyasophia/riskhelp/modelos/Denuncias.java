@@ -1,4 +1,4 @@
-package com.cinthyasophia.riskhelp;
+package com.cinthyasophia.riskhelp.modelos;
 
 public class Denuncias {
     private String id;

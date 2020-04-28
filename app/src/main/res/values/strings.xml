@@ -8,8 +8,16 @@
     <string name="name">Name</string>
     <string name="last_name">Last name</string>
     <string name="email_address">Email address</string>
-    <string name="telephone" translatable="false">Telephone</string>
+    <string name="telephone">Telephone</string>
     <string name="password">Password</string>
     <string name="sign_up_message">You need to register first before you can start, so tell us about yourself!</string>
+    <string name="next">Next</string>
+    <string name="app_slogan">CONECT, WARN, HELP</string>
+    <string name="log_in_message">"You're back! It's great to see you again! "</string>
+    <string name="volunteer_message">Are you a volunteer?</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="yes">Yes</string>
+    <string name="no" translatable="false">No</string>
+    <string name="emergency_message">You can use the emergency button to send an immediate alert.</string>
 
 </resources>
