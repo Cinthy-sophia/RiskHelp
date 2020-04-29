@@ -11,12 +11,16 @@
     <string name="email_address">Correo Electronico</string>
     <string name="telephone">Teléfono</string>
     <string name="password">Contraseña</string>
-    <string name="sign_up_message">Es necesario que te registres primero antes de comenzar, ¡Cuéntanos sobre ti!</string>
+    <string name="sign_up_user">Es necesario que te registres primero antes de comenzar, ¡Cuéntanos sobre ti!</string>
     <string name="next">Siguiente</string>
     <string name="app_slogan">CONECTA, AVISA, AYUDA</string>
     <string name="log_in_message">"¡Regresaste! ¡Es genial verte de nuevo! "</string>
-    <string name="volunteer_message">¿Eres un voluntario?</string>
+    <string name="volunteer_message">¿Que tipo de ayudante te gustaria ser?</string>
     <string name="postal_code">Codigo Postal</string>
     <string name="yes">Si</string>
     <string name="emergency_message">Puedes usar el botón de emergencia para enviar una alerta inmediata.</string>
+    <string name="sign_up_volunteer">¡Gracias por escoger RiskHelp para ayudar a la comunidad! Registrate para comenzar</string>
+    <string name="address">Dirección</string>
+    <string name="volunteer_group">Grupo Voluntario</string>
+    <string name="regular_user">Usuario regular</string>
 </resources>

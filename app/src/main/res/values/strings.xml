@@ -10,14 +10,18 @@
     <string name="email_address">Email address</string>
     <string name="telephone">Telephone</string>
     <string name="password">Password</string>
-    <string name="sign_up_message">You need to register first before you can start, so tell us about yourself!</string>
+    <string name="sign_up_user">You need to register first before you can start, so tell us about yourself!</string>
     <string name="next">Next</string>
     <string name="app_slogan">CONECT, WARN, HELP</string>
     <string name="log_in_message">"You're back! It's great to see you again! "</string>
-    <string name="volunteer_message">Are you a volunteer?</string>
+    <string name="volunteer_message">What type of user would you like to be?</string>
     <string name="postal_code">Postal Code</string>
     <string name="yes">Yes</string>
     <string name="no" translatable="false">No</string>
     <string name="emergency_message">You can use the emergency button to send an immediate alert.</string>
+    <string name="sign_up_volunteer">Thank you for choosing RiskHelp to help the community! Sign up to get started</string>
+    <string name="address">Address</string>
+    <string name="volunteer_group">Volunteer Group</string>
+    <string name="regular_user">Regular User</string>
 
 </resources>

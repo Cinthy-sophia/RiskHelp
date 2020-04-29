@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.345">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfApellido"
+            android:id="@+id/tfApellidoODireccion"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
@@ -109,7 +109,6 @@
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:password="true"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -149,7 +148,8 @@
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:verticalScrollbarPosition="right" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,7 +188,7 @@
         app:layout_constraintVertical_bias="0.704" />
 
     <TextView
-        android:id="@+id/tvApellido"
+        android:id="@+id/tvApellidoODireccion"
         android:layout_width="116dp"
         android:layout_height="25dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -261,11 +261,11 @@
         app:srcCompat="@drawable/risk_help_logo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvMessage"
         android:layout_width="401dp"
         android:layout_height="60dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/sign_up_message"
+        android:text="@string/sign_up_user"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
