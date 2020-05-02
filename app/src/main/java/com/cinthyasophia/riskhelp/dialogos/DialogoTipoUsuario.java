@@ -52,7 +52,7 @@ public class DialogoTipoUsuario extends DialogFragment{
         Fragment fSignUp = new FragmentSignUp();
         b.putString("tipoUsuario",tipoUsuario);
         fSignUp.setArguments(b);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal,fSignUp).addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio,fSignUp).addToBackStack(null).commit();
     }
 
 }

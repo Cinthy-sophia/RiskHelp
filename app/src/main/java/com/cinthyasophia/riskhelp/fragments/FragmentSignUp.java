@@ -1,5 +1,6 @@
 package com.cinthyasophia.riskhelp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cinthyasophia.riskhelp.MainActivity;
+import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class FragmentSignUp extends Fragment {
+    private final int PASSWORD_MIN_SIZE = 6;
     private TextView tvMessage;
     private TextView tvApellidoODireccion;
     private TextInputEditText tfNombre;
@@ -29,16 +33,20 @@ public class FragmentSignUp extends Fragment {
     private TextInputEditText tfEmail;
     private TextInputEditText tfPassword;
     private Button bSiguiente;
-    String tipoUsuario;
+    private String tipoUsuario;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up,container,false);
         tipoUsuario= getArguments().getString("tipoUsuario");
+
         //Text Views
+        //Dependiendo del tipo de usuario(Usuario regular/grupo voluntario), tendrán un contenido u otro
         tvMessage = view.findViewById(R.id.tvMessage);
         tvApellidoODireccion = view.findViewById(R.id.tvApellidoODireccion);
+
         //Text Fields
         tfNombre = view.findViewById(R.id.tfNombre);
         tfApellidoODireccion = view.findViewById(R.id.tfApellidoODireccion);
@@ -70,32 +78,55 @@ public class FragmentSignUp extends Fragment {
                 break;
         }
 
+
         bSiguiente.setOnClickListener(new View.OnClickListener() {
-        @Override
+            @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(tfEmail.getText().toString(),tfPassword.getText().toString())
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                iniciarFragmentPrincipal();
-                            }
-                        })
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                Toast.makeText(getContext(),"HA SIDO CORRECTO.",Toast.LENGTH_LONG);
-                            }
-                        });
+                if (tfNombre.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+
+                }else if(tfApellidoODireccion.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+
+                }else if(tfCodigoPostal.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+
+                }else if(tfTelefono.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+
+                }else if(tfEmail.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+                }else if (tfPassword.getText().toString().isEmpty() || tfPassword.getText().length() < PASSWORD_MIN_SIZE ){
+                    Toast.makeText(getContext(),"El campo no puede estar vacío, o tener menos de "+PASSWORD_MIN_SIZE+" caracteres.",Toast.LENGTH_LONG).show();
+
+                }else{
+
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(tfEmail.getText().toString(),tfPassword.getText().toString())
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(),"Ha ocurrido un error revisa los datos introducidos.",Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                   iniciarActivityPrincipal();
+                                }
+                            });
 
 
+                }
             }
+
+
         });
 
     }
-    public void iniciarFragmentPrincipal(){
+    public void iniciarActivityPrincipal(){
         Bundle b = new Bundle();
-        Fragment fPrincipal = new FragmentPrincipal();
-        fPrincipal.setArguments(b);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal,fPrincipal).commit();
+        Intent i = new Intent(getContext(),PrincipalActivity.class);
+        startActivity(i);
     }
+
 }

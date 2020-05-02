@@ -23,4 +23,9 @@
     <string name="address">Dirección</string>
     <string name="volunteer_group">Grupo Voluntario</string>
     <string name="regular_user">Usuario regular</string>
+    <string name="menu_received_alerts">Alertas Recibidas</string>
+    <string name="menu_alerts">Alertas</string>
+    <string name="menu_my_profile">Mi Perfil</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="log_out">Cerrar Sesión</string>
 </resources>

@@ -171,7 +171,6 @@
         app:layout_constraintVertical_bias="0.423" />
 
     <TextView
-        android:id="@+id/tvEmail"
         android:layout_width="232dp"
         android:layout_height="31dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -249,7 +248,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivFotoUsuario"
         android:layout_width="228dp"
         android:layout_height="53dp"
         app:layout_constraintBottom_toBottomOf="parent"

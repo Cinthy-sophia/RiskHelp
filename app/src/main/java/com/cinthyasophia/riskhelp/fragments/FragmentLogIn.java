@@ -1,5 +1,6 @@
 package com.cinthyasophia.riskhelp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +25,7 @@ public class FragmentLogIn extends Fragment {
     Button bEntrar;
     TextInputEditText tfEmail;
     TextInputEditText tfPassword;
+
 
     @Nullable
     @Override
@@ -69,8 +72,7 @@ public class FragmentLogIn extends Fragment {
     }
     public void iniciarFragmentPrincipal(){
         Bundle b = new Bundle();
-        Fragment fPrincipal = new FragmentPrincipal();
-        fPrincipal.setArguments(b);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal,fPrincipal).commit();
+        Intent i = new Intent(getContext(), PrincipalActivity.class);
+        startActivity(i);
     }
 }

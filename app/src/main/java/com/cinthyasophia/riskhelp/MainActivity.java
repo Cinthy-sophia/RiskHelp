@@ -14,18 +14,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iniciarFragmentPrincipal();
+        iniciarFragmentInicio();
 
     }
     /**
      * Inicia el fragment principal
      *
      */
-    public void iniciarFragmentPrincipal(){
+    public void iniciarFragmentInicio(){
         Bundle b = new Bundle();
-        Fragment fPrincipal = new FragmentInicio();
-        fPrincipal.setArguments(b);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal,fPrincipal).commit();
+        Fragment fInicio = new FragmentInicio();
+        fInicio.setArguments(b);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio,fInicio).commit();
     }
 
 }

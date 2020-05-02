@@ -8,7 +8,7 @@
     android:background="#970c10">
 
     <TextView
-        android:id="@+id/tvEmail2"
+        android:id="@+id/tvEmail"
         android:layout_width="232dp"
         android:layout_height="31dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -100,7 +100,7 @@
         app:srcCompat="@drawable/risk_help_logo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvEmailUsuario"
         android:layout_width="401dp"
         android:layout_height="60dp"
         android:fontFamily="sans-serif-smallcaps"
