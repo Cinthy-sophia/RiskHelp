@@ -102,5 +102,7 @@ public class FragmentInicio extends Fragment {
         i.putExtra("nombreUsuario",nombreU);
         i.putExtra("emailUsuario",emailU);
         startActivity(i);
+        //Para eliminar la activity anterior al iniciar la nueva
+        getActivity().finish();
     }
 }
