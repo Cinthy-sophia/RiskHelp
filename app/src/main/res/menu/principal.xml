@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miAjustes"
+        android:fontFamily="sans-serif-smallcaps"
         android:icon="@drawable/ic_settings_black_24dp"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/miCerrarSesion"
+        android:fontFamily="sans-serif-smallcaps"
         android:icon="@drawable/ic_power_settings_new_black_24dp"
         android:title="@string/log_out" />
 </menu>

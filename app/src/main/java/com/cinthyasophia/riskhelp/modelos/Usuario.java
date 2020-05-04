@@ -6,17 +6,17 @@ public class Usuario {
     private String id;
     private String nombre;
     private String apellido;
-    private String correo_electronico;
-    private String numero_telefono;
-    private boolean voluntario;
+    private String email;
+    private String telefono;
+    private int codigoPostal;
     private ArrayList<String> denuncias_hechas;
 
-    public Usuario(String nombre, String apellido, String correo_electronico, String numero_telefono, boolean voluntario, ArrayList<String> denuncias_hechas) {
+    public Usuario(String nombre, String apellido, String email, String telefono, int codigoPostal, ArrayList<String> denuncias_hechas) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.correo_electronico = correo_electronico;
-        this.numero_telefono = numero_telefono;
-        this.voluntario = voluntario;
+        this.email = email;
+        this.telefono = telefono;
+        this.codigoPostal = codigoPostal;
         this.denuncias_hechas = denuncias_hechas;
     }
 
@@ -32,16 +32,16 @@ public class Usuario {
         return apellido;
     }
 
-    public String getCorreo_electronico() {
-        return correo_electronico;
+    public String getEmail() {
+        return email;
     }
 
-    public String getNumero_telefono() {
-        return numero_telefono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public boolean isVoluntario() {
-        return voluntario;
+    public int getCodigoPostal() {
+        return codigoPostal;
     }
 
     public ArrayList<String> getDenuncias_hechas() {

@@ -1,16 +1,23 @@
 package com.cinthyasophia.riskhelp;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cinthyasophia.riskhelp.fragments.FragmentAlertas;
+import com.cinthyasophia.riskhelp.fragments.FragmentAlertasRecibidas;
+import com.cinthyasophia.riskhelp.fragments.FragmentMiPerfil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,11 +26,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private AppBarConfiguration mAppBarConfiguration;
     private TextView tvNombreUsuario;
     private TextView tvEmailUsuario;
+    private Fragment fragment;
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +48,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -62,12 +70,45 @@ public class PrincipalActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.principal, menu);
         return true;
     }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        Bundle b = new Bundle();
+        fragment = new FragmentAlertas();
 
-    /*@Override
-   *//* public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.fragment_principal);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }*/
 
+        if (id == R.id.nav_alertas) {
+            b.putString("ALERTAS", "Mi texto");
+            fragment.setArguments(b);
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+
+        } else if (id == R.id.nav_alertas_recibidas) {
+            b.putString("ALERTAS RECIBIDAS", "Mi texto");
+            fragment = new FragmentAlertasRecibidas();
+            fragment.setArguments(b);
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+        } else if (id == R.id.nav_my_profile) {
+            b.putString("MI PERFIL", "Mi texto");
+            fragment.setArguments(b);
+            fragment = new FragmentMiPerfil();
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+        //fragment.setListener(this);
+        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+
+            super.onBackPressed();
+        }
+    }
 }

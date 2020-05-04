@@ -31,7 +31,7 @@ public class FragmentInicio extends Fragment {
         bEmergencia = view.findViewById(R.id.bEmergencia);
         bRegistro = view.findViewById(R.id.bRegistro);
         bIniciarSesion = view.findViewById(R.id.bIniciarSesion);
-        if(FirebaseAuth.getInstance().getCurrentUser() != null) {//todo cambiar el signo del null a != para que acceda al fragment principal directamente
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             // El usuario que ya se ha autenticado, ingresa directamente a la ventana principal de la aplicacion
             Toast.makeText(getContext(),
                     "Bienvenido " + FirebaseAuth.getInstance()
@@ -44,7 +44,7 @@ public class FragmentInicio extends Fragment {
                     .getCurrentUser()
                     .getDisplayName());*/
 
-            iniciarFragmentPrincipal(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getEmail());
+           // iniciarActivityPrincipal(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         }
 
@@ -97,7 +97,7 @@ public class FragmentInicio extends Fragment {
      * @param nombreU
      * @param emailU
      */
-    public void iniciarFragmentPrincipal(String nombreU,String emailU){
+    public void iniciarActivityPrincipal(String nombreU, String emailU){
         Intent i = new Intent(getContext(), PrincipalActivity.class);
         i.putExtra("nombreUsuario",nombreU);
         i.putExtra("emailUsuario",emailU);

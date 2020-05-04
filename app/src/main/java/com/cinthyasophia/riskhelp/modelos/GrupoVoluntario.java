@@ -2,24 +2,30 @@ package com.cinthyasophia.riskhelp.modelos;
 
 import java.util.ArrayList;
 
-public class GruposVoluntarios {
+public class GrupoVoluntario {
     private String id;
     private String nombre;
     private String direccion;
     private String telefono;
+    private String email;
+    private int codigoPostal;
     private ArrayList<String> denunciasRespondidas;
-    private ArrayList<String> integrantes;
 
-    public GruposVoluntarios(String nombre, String direccion, String telefono, ArrayList<String> denunciasRespondidas, ArrayList<String> integrantes) {
+    public GrupoVoluntario(String nombre, String direccion, String telefono, ArrayList<String> denunciasRespondidas, int codigoPostal, String email) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.codigoPostal = codigoPostal;
         this.denunciasRespondidas = denunciasRespondidas;
-        this.integrantes = integrantes;
+        this.email = email;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getNombre() {
@@ -34,11 +40,12 @@ public class GruposVoluntarios {
         return telefono;
     }
 
+    public int getCodigoPostal() {
+        return codigoPostal;
+    }
+
     public ArrayList<String> getDenunciasRespondidas() {
         return denunciasRespondidas;
     }
 
-    public ArrayList<String> getIntegrantes() {
-        return integrantes;
-    }
 }

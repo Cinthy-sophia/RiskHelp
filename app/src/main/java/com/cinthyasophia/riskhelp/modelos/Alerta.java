@@ -1,15 +1,16 @@
 package com.cinthyasophia.riskhelp.modelos;
 
-public class Denuncias {
+public class Alerta {
     private String id;
     private String descripcion;
     private String direccion;
     private boolean anonimo;
+    private boolean tomada;
     private String denunciante;
     private String telefono;
-    private String respondio;
+    private String grupo;
 
-    public Denuncias(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String respondio) {
+    public Alerta(String descripcion, String direccion, boolean anonimo, boolean tomada, String denunciante, String telefono, String grupo) {
         this.descripcion = descripcion;
         this.direccion = direccion;
         this.anonimo = anonimo;
@@ -19,7 +20,8 @@ public class Denuncias {
             this.denunciante = denunciante;
         }
         this.telefono = telefono;
-        this.respondio = respondio;
+        this.grupo = grupo;
+        this.tomada = tomada;
     }
 
     public String getId() {
@@ -46,7 +48,11 @@ public class Denuncias {
         return telefono;
     }
 
-    public String getRespondio() {
-        return respondio;
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public boolean isTomada() {
+        return tomada;
     }
 }
