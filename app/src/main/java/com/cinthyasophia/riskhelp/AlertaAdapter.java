@@ -51,6 +51,7 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.AlertaView
         private TextView tvDescripcion;
         private TextView tvDireccion;
         private TextView tvTelefono;
+        private TextView tvGrupoV;
 
         public AlertaViewHolder(@NonNull View itemView, String tipoUsuario, IAlertaListener listener) {
             super(itemView);
@@ -58,6 +59,7 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.AlertaView
             tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
             tvDireccion = itemView.findViewById(R.id.tvDirección);
             tvTelefono = itemView.findViewById(R.id.tvTelefono);
+            tvGrupoV = itemView.findViewById(R.id.tvGrupoV);
             this.tipoUsuario = tipoUsuario;
             this.listener = listener;
             itemView.setOnClickListener(this);
@@ -68,6 +70,7 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.AlertaView
             tvDescripcion.setText(alerta.getDescripcion());
             tvDireccion.setText(alerta.getDireccion());
             tvTelefono.setText(alerta.getTelefono());
+            tvGrupoV.setText(alerta.getGrupo());
 
         }
 
@@ -80,6 +83,7 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.AlertaView
                     tvDescripcion.setTypeface(Typeface.DEFAULT);
                     tvDireccion.setTypeface(Typeface.DEFAULT);
                     tvTelefono.setTypeface(Typeface.DEFAULT);
+                    tvGrupoV.setTypeface(Typeface.DEFAULT);
                 }
 
             }

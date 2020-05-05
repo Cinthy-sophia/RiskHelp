@@ -26,11 +26,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAlertaListener{
 
     private TextView tvNombreUsuario;
     private TextView tvEmailUsuario;
-    private Fragment fragment;
+    private FragmentAlertas fragment;
     DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,21 +81,18 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             b.putString("ALERTAS", "Mi texto");
             fragment.setArguments(b);
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
-
         } else if (id == R.id.nav_alertas_recibidas) {
             b.putString("ALERTAS RECIBIDAS", "Mi texto");
-            fragment = new FragmentAlertasRecibidas();
+            //fragment = new FragmentAlertasRecibidas();
             fragment.setArguments(b);
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
         } else if (id == R.id.nav_my_profile) {
             b.putString("MI PERFIL", "Mi texto");
             fragment.setArguments(b);
-            fragment = new FragmentMiPerfil();
+            //fragment = new FragmentMiPerfil();
         }
-
+        fragment.setListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
-        //fragment.setListener(this);
-        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
@@ -110,5 +107,10 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onAlertaClicked(int adapterPosition, String direccion) {
+        //todo accion con el listener
     }
 }
