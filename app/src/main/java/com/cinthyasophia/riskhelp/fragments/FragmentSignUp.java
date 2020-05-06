@@ -18,6 +18,7 @@ import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,22 +83,14 @@ public class FragmentSignUp extends Fragment {
         bSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tfNombre.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+                if (tfNombre.getText().toString().isEmpty() || tfApellidoODireccion.getText().toString().isEmpty()
+                || tfCodigoPostal.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()
+                ||tfEmail.getText().toString().isEmpty()){
 
-                }else if(tfApellidoODireccion.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),R.string.email_error,Toast.LENGTH_LONG).show();
 
-                }else if(tfCodigoPostal.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
-
-                }else if(tfTelefono.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
-
-                }else if(tfEmail.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío.",Toast.LENGTH_LONG).show();
                 }else if (tfPassword.getText().toString().isEmpty() || tfPassword.getText().length() < PASSWORD_MIN_SIZE ){
-                    Toast.makeText(getContext(),"El campo no puede estar vacío, o tener menos de "+PASSWORD_MIN_SIZE+" caracteres.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),R.string.password_error,Toast.LENGTH_LONG).show();
 
                 }else{
 
@@ -105,7 +98,16 @@ public class FragmentSignUp extends Fragment {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getContext(),"Ha ocurrido un error revisa los datos introducidos.",Toast.LENGTH_LONG).show();
+                                    Snackbar snack = Snackbar.make(getView(), R.string.sign_up_failure, Snackbar.LENGTH_INDEFINITE);
+                                    snack.setAction("OK", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            // Respond to the click, such as by undoing the modification that caused
+                                            // this message to be displayed
+                                            //Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    snack.show();
                                 }
                             })
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {

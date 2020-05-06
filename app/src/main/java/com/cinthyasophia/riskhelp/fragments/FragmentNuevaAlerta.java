@@ -14,11 +14,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.cinthyasophia.riskhelp.R;
 
-public class FragmentAlertasRecibidas extends Fragment {
+public class FragmentNuevaAlerta extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_alertas_recibidas, container, false);
+        View view = inflater.inflate(R.layout.fragment_nueva_alerta, container, false);
 
         return view;
     }

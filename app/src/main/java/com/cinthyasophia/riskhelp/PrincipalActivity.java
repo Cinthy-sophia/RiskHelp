@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cinthyasophia.riskhelp.fragments.FragmentAlertas;
-import com.cinthyasophia.riskhelp.fragments.FragmentAlertasRecibidas;
 import com.cinthyasophia.riskhelp.fragments.FragmentMiPerfil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -17,11 +16,6 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,8 +24,10 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     private TextView tvNombreUsuario;
     private TextView tvEmailUsuario;
+    private ImageView ivFotoUsuario;
     private FragmentAlertas fragment;
-    DrawerLayout drawer;
+    private String tipoUsuario;
+    private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +54,11 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         View header = navigationView.getHeaderView(0);
         tvNombreUsuario = header.findViewById(R.id.tvNombreUsuario);
         tvEmailUsuario = header.findViewById(R.id.tvEmailUsuario);
+        ivFotoUsuario = header.findViewById(R.id.ivFotoUsuario);//todo cambio de la imagen en preferencias
 
         tvNombreUsuario.setText(getIntent().getStringExtra("nombreUsuario"));
         tvEmailUsuario.setText(getIntent().getStringExtra("emailUsuario"));
+        tipoUsuario = getIntent().getExtras().getString("tipoUsuario");
     }
 
 
@@ -74,25 +72,32 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         Bundle b = new Bundle();
-        fragment = new FragmentAlertas();
-
+        b.putString("tipoUsuario",tipoUsuario);
 
         if (id == R.id.nav_alertas) {
             b.putString("ALERTAS", "Mi texto");
             fragment.setArguments(b);
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
-        } else if (id == R.id.nav_alertas_recibidas) {
-            b.putString("ALERTAS RECIBIDAS", "Mi texto");
-            //fragment = new FragmentAlertasRecibidas();
+            setTitle(R.string.menu_alerts);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+        } else if (id == R.id.nav_alertas_tomadas) {
+            b.putString("ALERTAS_TOMADAS", "Mi texto");
+            setTitle(R.string.menu_taken_alerts);
             fragment.setArguments(b);
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
-        } else if (id == R.id.nav_my_profile) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+        } else if (id == R.id.nav_alertas_no_tomadas) {
+            b.putString("ALERTAS_NO_TOMADAS", "Mi texto");
+            fragment.setArguments(b);
+            setTitle(R.string.menu_untaken_alerts);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
+
+        }else if (id == R.id.nav_mi_perfil) {
             b.putString("MI PERFIL", "Mi texto");
-            fragment.setArguments(b);
-            //fragment = new FragmentMiPerfil();
+            setTitle(R.string.menu_my_profile);
+            FragmentMiPerfil fragmentMiPerfil = new FragmentMiPerfil();
+            fragmentMiPerfil.setArguments(b);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentMiPerfil).commit();
         }
         fragment.setListener(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
@@ -100,17 +105,15 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-
-            super.onBackPressed();
+            finish();
         }
     }
 
     @Override
     public void onAlertaClicked(int adapterPosition, String direccion) {
-        //todo accion con el listener
+        //todo accion con el listener, al hacer click en la alerta se cargará google maps
     }
 }

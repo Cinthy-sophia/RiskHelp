@@ -13,7 +13,7 @@
     <string name="sign_up_user">You need to register first before you can start, so tell us about yourself!</string>
     <string name="next">Next</string>
     <string name="app_slogan">CONECT, WARN, HELP</string>
-    <string name="log_in_message">"You're back! It's great to see you again! "</string>
+    <string name="log_in_message_user">"You're back! It's great to see you again! "</string>
     <string name="volunteer_message">What type of user would you like to be?</string>
     <string name="postal_code">Postal Code</string>
     <string name="yes">Yes</string>
@@ -31,12 +31,21 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_received_alerts">Received Alerts</string>
+    <string name="menu_taken_alerts">Taken Alerts</string>
+    <string name="menu_untaken_alerts">Untaken Alerts</string>
 
     <string name="home_second" translatable="false">Received Alerts</string>
     <string name="menu_alerts">Reports</string>
     <string name="menu_my_profile">My Profile</string>
     <string name="log_out">Log Out</string>
     <string name="description">Description</string>
+    <string name="log_in_message_volunteer">We\'re glad to see you again, thank you for your amazing job!</string>
+    <string name="email_empty">The email field can\'t be empty</string>
+    <string name="email_error">The email is incorrect</string>
+    <string name="password_error">"The password field cannot be empty, or have less than 6 characters "</string>
+    <string name="log_in_failure">The data entered was not correct, please check and try again</string>
+    <string name="empty_field">The field cannot be empty</string>
+    <string name="sign_up_failure">"Your sign up has failed, please check your information and try again "</string>
+
 
 </resources>

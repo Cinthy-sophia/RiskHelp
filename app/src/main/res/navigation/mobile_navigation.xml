@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.cinthyasophia.riskhelp.fragments.FragmentAlertasRecibidas"
+        android:name="com.cinthyasophia.riskhelp.fragments.FragmentNuevaAlerta"
         android:label="@string/"
         tools:layout="@layout/fragment_alertas_recibidas" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.cinthyasophia.riskhelp.fragments.FragmentMiPerfil"
-        android:label="@string/menu_received_alerts"
+        android:label="@string/menu_taken_alerts"
         tools:layout="@layout/fragment_mi_perfil" />
 </navigation>

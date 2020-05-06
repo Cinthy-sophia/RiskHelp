@@ -35,7 +35,7 @@ public class FragmentAlertas extends Fragment {
 
         Bundle b = getArguments();
         if (b!=null){
-            tipoUsuario = ""; //todo colocar el tipo de usuario correspondiente
+            tipoUsuario = b.getString("tipoUsuario");
             //todo proceso de selección de alertas segun el tipo de usuario que ha ingresado, y la seccíon de menú que se muestra
         }
         adapter = new AlertaAdapter(tipoUsuario,alertas,listener);
