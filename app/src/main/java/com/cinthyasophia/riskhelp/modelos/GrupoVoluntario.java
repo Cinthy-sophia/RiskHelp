@@ -9,15 +9,19 @@ public class GrupoVoluntario {
     private String telefono;
     private String email;
     private int codigoPostal;
-    private ArrayList<String> denunciasRespondidas;
+    private ArrayList<String> alertasRespondidas;
 
-    public GrupoVoluntario(String nombre, String direccion, String telefono, ArrayList<String> denunciasRespondidas, int codigoPostal, String email) {
+    public GrupoVoluntario(String nombre, String direccion, String telefono, ArrayList<String> alertasRespondidas, int codigoPostal, String email) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.codigoPostal = codigoPostal;
-        this.denunciasRespondidas = denunciasRespondidas;
+        this.alertasRespondidas = alertasRespondidas;
         this.email = email;
+    }
+
+    public GrupoVoluntario() {
+
     }
 
     public String getId() {
@@ -44,8 +48,8 @@ public class GrupoVoluntario {
         return codigoPostal;
     }
 
-    public ArrayList<String> getDenunciasRespondidas() {
-        return denunciasRespondidas;
+    public ArrayList<String> getAlertasRespondidas() {
+        return alertasRespondidas;
     }
 
 }

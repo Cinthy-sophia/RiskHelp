@@ -37,4 +37,5 @@
     <string name="log_in_failure">Los datos introducidos no han sido correctos, revisa e intentalo de nuevo</string>
     <string name="empty_field">El campo no puede estar vacío</string>
     <string name="sign_up_failure">Tu registro ha fallado, comprueba tu información e intentalo de nuevo</string>
+    <string name="anonimous">Anónimo</string>
 </resources>

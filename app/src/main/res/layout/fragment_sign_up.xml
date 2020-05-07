@@ -9,7 +9,6 @@
 
 
     <TextView
-        android:id="@+id/tvNombre"
         android:layout_width="79dp"
         android:layout_height="28dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -26,7 +25,6 @@
         app:layout_constraintVertical_bias="0.147" />
 
     <TextView
-        android:id="@+id/tvPassword"
         android:layout_width="145dp"
         android:layout_height="36dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -58,7 +56,7 @@
         app:layout_constraintVertical_bias="0.345">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfApellidoODireccion"
+            android:id="@+id/tfDescripcion"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
@@ -81,7 +79,7 @@
         app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfCodigoPostal"
+            android:id="@+id/tfTelefono"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
@@ -114,7 +112,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tvCodigoPostal"
         android:layout_width="144dp"
         android:layout_height="23dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -154,7 +151,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tvTelefono"
         android:layout_width="133dp"
         android:layout_height="28dp"
         android:fontFamily="sans-serif-smallcaps"
@@ -217,7 +213,7 @@
         app:layout_constraintVertical_bias="0.488">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfTelefono"
+            android:id="@+id/tfDireccion"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"

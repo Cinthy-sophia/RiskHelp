@@ -20,6 +20,10 @@ public class Usuario {
         this.denuncias_hechas = denuncias_hechas;
     }
 
+    public Usuario() {
+
+    }
+
     public String getId() {
         return id;
     }

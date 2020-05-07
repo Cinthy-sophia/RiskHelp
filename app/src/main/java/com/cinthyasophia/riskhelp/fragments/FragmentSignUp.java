@@ -129,6 +129,7 @@ public class FragmentSignUp extends Fragment {
         Bundle b = new Bundle();
         Intent i = new Intent(getContext(),PrincipalActivity.class);
         startActivity(i);
+        getActivity().finish();
     }
 
 }

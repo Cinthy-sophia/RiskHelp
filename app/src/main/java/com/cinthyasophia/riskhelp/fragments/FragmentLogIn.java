@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cinthyasophia.riskhelp.MainActivity;
 import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -94,5 +95,6 @@ public class FragmentLogIn extends Fragment {
         Intent i = new Intent(getContext(), PrincipalActivity.class);
         i.putExtra("tipoUsuario",tipoUsuario);
         startActivity(i);
+        getActivity().finish();
     }
 }
