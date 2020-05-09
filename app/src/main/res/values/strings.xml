@@ -14,7 +14,7 @@
     <string name="next">Next</string>
     <string name="app_slogan">CONECT, WARN, HELP</string>
     <string name="log_in_message_user">"You're back! It's great to see you again! "</string>
-    <string name="volunteer_message">What type of user would you like to be?</string>
+    <string name="dialog_volunteer_message">Which type of user would you like to be?</string>
     <string name="postal_code">Postal Code</string>
     <string name="yes">Yes</string>
     <string name="no" translatable="false">No</string>
@@ -44,9 +44,12 @@
     <string name="email_error">The email is incorrect</string>
     <string name="password_error">"The password field cannot be empty, or have less than 6 characters "</string>
     <string name="log_in_failure">The data entered was not correct, please check and try again</string>
-    <string name="empty_field">The field cannot be empty</string>
+    <string name="empty_field">The fields cannot be empty</string>
     <string name="sign_up_failure">"Your sign up has failed, please check your information and try again "</string>
     <string name="anonimous">Anonimous</string>
+    <string name="new_alert">New Alert</string>
+    <string name="new_alert_message">In order to help you we need more information, please fill in the fields below.</string>
+    <string name="dialog_user_message">Which type of user are you?</string>
 
 
 </resources>

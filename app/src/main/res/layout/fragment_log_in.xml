@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#970c10">
+    android:background="#970c10"
+    android:padding="0dp">
 
     <TextView
         android:layout_width="232dp"
@@ -18,31 +18,29 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.484" />
+        app:layout_constraintVertical_bias="0.44" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="199dp"
-        android:layout_height="66dp"
+        android:layout_width="222dp"
+        android:layout_height="71dp"
         app:boxBackgroundColor="#43FFFFFF"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfPassword"
+            android:id="@+id/tfEmail"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:password="true"
+            android:padding="0dp"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,14 +56,14 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621" />
+        app:layout_constraintVertical_bias="0.577" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="222dp"
-        android:layout_height="71dp"
+        android:layout_width="199dp"
+        android:layout_height="66dp"
         app:boxBackgroundColor="#43FFFFFF"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
@@ -74,13 +72,16 @@
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546">
+        app:layout_constraintVertical_bias="0.657"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfEmail"
+            android:id="@+id/tfPassword"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
+            android:password="true"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,10 +119,11 @@
         android:id="@+id/bEntrar"
         android:layout_width="104dp"
         android:layout_height="64dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/log_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintHorizontal_bias="0.811"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.836" />

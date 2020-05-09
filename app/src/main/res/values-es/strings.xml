@@ -15,7 +15,7 @@
     <string name="next">Siguiente</string>
     <string name="app_slogan">CONECTA, AVISA, AYUDA</string>
     <string name="log_in_message_user">"¡Regresaste! ¡Es genial verte de nuevo! "</string>
-    <string name="volunteer_message">¿Que tipo de ayudante te gustaria ser?</string>
+    <string name="dialog_volunteer_message">¿Que tipo de usuario te gustaria ser?</string>
     <string name="postal_code">Codigo Postal</string>
     <string name="yes">Si</string>
     <string name="emergency_message">Puedes usar el botón de emergencia para enviar una alerta inmediata.</string>
@@ -35,7 +35,10 @@
     <string name="email_error">El correo eléctronico es incorrecto</string>
     <string name="password_error">El campo de la contraseña no puede estar vacío, o tener menos de 6 caracteres</string>
     <string name="log_in_failure">Los datos introducidos no han sido correctos, revisa e intentalo de nuevo</string>
-    <string name="empty_field">El campo no puede estar vacío</string>
+    <string name="empty_field">Los campos no pueden estar vacíos</string>
     <string name="sign_up_failure">Tu registro ha fallado, comprueba tu información e intentalo de nuevo</string>
     <string name="anonimous">Anónimo</string>
+    <string name="new_alert">Alerta Nueva</string>
+    <string name="new_alert_message">Para poder ayudarte necesitamos mas información, para ello completa los campos a continuación.</string>
+    <string name="dialog_user_message">¿Qué tipo de usuario eres?</string>
 </resources>

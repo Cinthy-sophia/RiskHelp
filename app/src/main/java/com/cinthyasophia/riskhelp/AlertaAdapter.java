@@ -37,12 +37,15 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.AlertaView
     public void onBindViewHolder(@NonNull AlertaViewHolder holder, int position) {
         Alerta alerta = alertas.get(position);
         holder.bindItem(alerta);
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
         return alertas.size();
     }
+
+
 
     public static class AlertaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private String tipoUsuario;

@@ -54,10 +54,11 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         View header = navigationView.getHeaderView(0);
         tvNombreUsuario = header.findViewById(R.id.tvNombreUsuario);
         tvEmailUsuario = header.findViewById(R.id.tvEmailUsuario);
-        ivFotoUsuario = header.findViewById(R.id.ivFotoUsuario);//todo cambio de la imagen en preferencias
+        ivFotoUsuario = header.findViewById(R.id.ivFotoUsuario);//todo cambio de la imagen en ajustes
 
         tvNombreUsuario.setText(getIntent().getStringExtra("nombreUsuario"));
         tvEmailUsuario.setText(getIntent().getStringExtra("emailUsuario"));
+
         tipoUsuario = getIntent().getExtras().getString("tipoUsuario");
     }
 
@@ -73,6 +74,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         int id = menuItem.getItemId();
         Bundle b = new Bundle();
         b.putString("tipoUsuario",tipoUsuario);
+        fragment = new FragmentAlertas();
 
         if (id == R.id.nav_alertas) {
             b.putString("ALERTAS", "Mi texto");
@@ -96,6 +98,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             FragmentMiPerfil fragmentMiPerfil = new FragmentMiPerfil();
             fragmentMiPerfil.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentMiPerfil).commit();
+
+        } else if (id == R.id.nav_log_out){
+            //todo se cierra la sesión, se finaliza el PrincipalActivity, y se inicia el MainActivity
         }
         fragment.setListener(this);
         drawer.closeDrawer(GravityCompat.START);

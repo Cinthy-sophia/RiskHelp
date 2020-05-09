@@ -33,6 +33,8 @@ public class DialogoTipoUsuario extends DialogFragment{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(),"El usuario no es voluntario",Toast.LENGTH_LONG).show();
+
+                //Si el usuario es un usuario regular segun si desea iniciar sesion o registrarse, los metodos cargan el fragment
                 if(fragment.equalsIgnoreCase("LOG_IN")){
                     iniciarFragmentLogIn("USUARIO");
 
@@ -46,6 +48,7 @@ public class DialogoTipoUsuario extends DialogFragment{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(),"El usuario es voluntario",Toast.LENGTH_LONG).show();
+                //Si el usuario es un grupo voluntario segun si desea iniciar sesion o registrarse, los metodos cargan el fragment
                 if(fragment.equalsIgnoreCase("LOG_IN")){
                     iniciarFragmentLogIn("GRUPO_VOLUNTARIO");
 

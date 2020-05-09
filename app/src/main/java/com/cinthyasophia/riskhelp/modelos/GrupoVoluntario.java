@@ -1,8 +1,9 @@
 package com.cinthyasophia.riskhelp.modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GrupoVoluntario {
+public class GrupoVoluntario implements Serializable {
     private String id;
     private String nombre;
     private String direccion;

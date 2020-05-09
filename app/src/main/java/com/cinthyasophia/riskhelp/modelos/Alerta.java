@@ -1,6 +1,8 @@
 package com.cinthyasophia.riskhelp.modelos;
 
-public class Alerta {
+import java.io.Serializable;
+
+public class Alerta implements Serializable {
     private String id;
     private String descripcion;
     private String direccion;
@@ -9,8 +11,10 @@ public class Alerta {
     private String denunciante;
     private String telefono;
     private String grupo;
+    private int codigoPostal;
 
-    public Alerta(String descripcion, String direccion, boolean anonimo, boolean tomada, String denunciante, String telefono, String grupo) {
+
+    public Alerta(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String grupo, int codigoPostal) {
         this.descripcion = descripcion;
         this.direccion = direccion;
         this.anonimo = anonimo;
@@ -21,7 +25,15 @@ public class Alerta {
         }
         this.telefono = telefono;
         this.grupo = grupo;
+        this.codigoPostal= codigoPostal;
+    }
+
+    public void setTomada(boolean tomada) {
         this.tomada = tomada;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 
     public String getId() {
@@ -54,5 +66,9 @@ public class Alerta {
 
     public boolean isTomada() {
         return tomada;
+    }
+
+    public int getCodigoPostal() {
+        return 0;
     }
 }

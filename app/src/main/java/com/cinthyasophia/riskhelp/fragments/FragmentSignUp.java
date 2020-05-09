@@ -2,6 +2,7 @@ package com.cinthyasophia.riskhelp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,16 @@ import androidx.fragment.app.Fragment;
 import com.cinthyasophia.riskhelp.MainActivity;
 import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class FragmentSignUp extends Fragment {
     private final int PASSWORD_MIN_SIZE = 6;
@@ -84,10 +89,14 @@ public class FragmentSignUp extends Fragment {
             @Override
             public void onClick(View v) {
                 if (tfNombre.getText().toString().isEmpty() || tfApellidoODireccion.getText().toString().isEmpty()
-                || tfCodigoPostal.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()
-                ||tfEmail.getText().toString().isEmpty()){
+                || tfCodigoPostal.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),R.string.empty_field,Toast.LENGTH_LONG).show();
 
+                }else if(tfEmail.getText().toString().isEmpty()){
                     Toast.makeText(getContext(),R.string.email_error,Toast.LENGTH_LONG).show();
+
+                }else if(!tfEmail.getText().toString().contains("@")) {
+                    Toast.makeText(getContext(), R.string.email_error, Toast.LENGTH_LONG).show();
 
                 }else if (tfPassword.getText().toString().isEmpty() || tfPassword.getText().length() < PASSWORD_MIN_SIZE ){
                     Toast.makeText(getContext(),R.string.password_error,Toast.LENGTH_LONG).show();
@@ -113,12 +122,34 @@ public class FragmentSignUp extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
-                                   iniciarActivityPrincipal();
+                                    FirebaseUser user = authResult.getUser();
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(tfNombre.getText().toString())
+                                            //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                            .build();
+
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d("INFO", "User profile updated.");
+                                                    }
+                                                }
+                                            });
+                                    iniciarActivityPrincipal();
                                 }
                             });
 
 
+
                 }
+                tfEmail.setText("");
+                tfNombre.setText("");
+                tfApellidoODireccion.setText("");
+                tfTelefono.setText("");
+                tfCodigoPostal.setText("");
+                tfPassword.setText("");
             }
 
 

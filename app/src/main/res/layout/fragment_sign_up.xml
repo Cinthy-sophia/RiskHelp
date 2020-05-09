@@ -26,7 +26,7 @@
 
     <TextView
         android:layout_width="145dp"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/password"
         android:textAlignment="viewStart"
@@ -56,10 +56,11 @@
         app:layout_constraintVertical_bias="0.345">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfDescripcion"
+            android:id="@+id/tfApellidoODireccion"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,10 +80,11 @@
         app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfTelefono"
+            android:id="@+id/tfCodigoPostal"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
             android:textAlignment="viewStart"
             android:textColor="#FFFFFF" />
 
@@ -107,6 +109,8 @@
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
+            android:password="true"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -145,6 +149,7 @@
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
             android:textColor="#FFFFFF"
             android:verticalScrollbarPosition="right" />
 
@@ -213,10 +218,11 @@
         app:layout_constraintVertical_bias="0.488">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfDireccion"
+            android:id="@+id/tfTelefono"
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:padding="0dp"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -238,7 +244,7 @@
             android:layout_width="199dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:textAlignment="viewStart"
+            android:padding="0dp"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>

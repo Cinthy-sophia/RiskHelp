@@ -70,31 +70,32 @@ public class FragmentInicio extends Fragment {
         bEmergencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo iniciar fragment emergencia
+                //todo iniciar fragmentnewAlert
+
             }
         });
 
         bIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogoTipoUsuario dialogoTipoUsuario = new DialogoTipoUsuario();
-                Bundle fragment = new Bundle();
-                fragment.putString("FRAGMENT","LOG_IN");
-                dialogoTipoUsuario.setArguments(fragment);
-                dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+                iniciarDialogoTipoUsuario("LOG_IN");
             }
         });
 
         bRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogoTipoUsuario dialogoTipoUsuario = new DialogoTipoUsuario();
-                Bundle fragment = new Bundle();
-                fragment.putString("FRAGMENT","SIGN_UP");
-                dialogoTipoUsuario.setArguments(fragment);
-                dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+                iniciarDialogoTipoUsuario("SIGN_UP");
             }
         });
+    }
+    public void iniciarDialogoTipoUsuario(String fragmentTipo) {
+        DialogoTipoUsuario dialogoTipoUsuario = new DialogoTipoUsuario();
+        Bundle fragment = new Bundle();
+        fragment.putString("FRAGMENT",fragmentTipo);
+        dialogoTipoUsuario.setArguments(fragment);
+        dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+
     }
 
     /**

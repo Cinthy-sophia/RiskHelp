@@ -7,11 +7,11 @@
     android:background="@color/colorAccent">
 
     <TextView
-        android:id="@+id/tvEmailUsuario"
+        android:id="@+id/tvDialogo"
         android:layout_width="391dp"
         android:layout_height="64dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/volunteer_message"
+        android:text="@string/dialog_volunteer_message"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
