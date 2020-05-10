@@ -41,4 +41,8 @@
     <string name="new_alert">Alerta Nueva</string>
     <string name="new_alert_message">Para poder ayudarte necesitamos mas información, para ello completa los campos a continuación.</string>
     <string name="dialog_user_message">¿Qué tipo de usuario eres?</string>
+    <string name="my_profile_settings">Para cambiar la foto de perfil, o  contraseña, debes ir a los ajustes en la parte superior derecha.</string>
+    <string name="select_volunteer_group">Selecciona un grupo voluntario</string>
+    <string name="new_alert_correct">La alerta ha sido creada con éxito.</string>
+    <string name="new_alert_error">La alerta no ha sido creada.</string>
 </resources>

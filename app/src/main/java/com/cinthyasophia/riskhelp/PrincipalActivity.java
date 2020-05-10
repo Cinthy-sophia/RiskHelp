@@ -1,5 +1,6 @@
 package com.cinthyasophia.riskhelp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.TextView;
 
 import com.cinthyasophia.riskhelp.fragments.FragmentAlertas;
 import com.cinthyasophia.riskhelp.fragments.FragmentMiPerfil;
+import com.cinthyasophia.riskhelp.fragments.FragmentNuevaAlerta;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -40,6 +46,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                iniciarFragmentNuevaAlerta();
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -60,6 +67,13 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         tvEmailUsuario.setText(getIntent().getStringExtra("emailUsuario"));
 
         tipoUsuario = getIntent().getExtras().getString("tipoUsuario");
+    }
+    /**
+     * Inicia el FragmentNuevaAlerta para que el usuario pueda mandar una alerta.
+     */
+    public void iniciarFragmentNuevaAlerta(){
+        FragmentNuevaAlerta fragmentNuevaAlerta = new FragmentNuevaAlerta();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentNuevaAlerta).commit();
     }
 
 
@@ -100,7 +114,20 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentMiPerfil).commit();
 
         } else if (id == R.id.nav_log_out){
-            //todo se cierra la sesión, se finaliza el PrincipalActivity, y se inicia el MainActivity
+            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Intent i = new Intent(PrincipalActivity.this,MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+
+        } else{
+            b.putString("ALERTAS", "Mi texto");
+            fragment.setArguments(b);
+            setTitle(R.string.menu_alerts);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
         }
         fragment.setListener(this);
         drawer.closeDrawer(GravityCompat.START);
@@ -119,6 +146,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onAlertaClicked(int adapterPosition, String direccion) {
+
         //todo accion con el listener, al hacer click en la alerta se cargará google maps
     }
 }

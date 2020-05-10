@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.cinthyasophia.riskhelp.R;
 import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
@@ -74,7 +72,7 @@ public class FragmentMiPerfil extends Fragment {
                 tvApellidoODireccion.setText(((GrupoVoluntario) usuario).getDireccion());
                 tvEmail.setText(((GrupoVoluntario) usuario).getEmail());
                 tvTelefono.setText(((GrupoVoluntario) usuario).getTelefono());
-                tvCodigoPostal.setText(((GrupoVoluntario) usuario).getCodigoPostal());
+                tvCodigoPostal.setText(((GrupoVoluntario) usuario).getCodigo_postal());
             }
         }
 

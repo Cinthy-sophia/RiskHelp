@@ -10,10 +10,10 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="303dp"
-        android:layout_height="38dp"
+        android:layout_width="310dp"
+        android:layout_height="68dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="Para cambios como la foto de perfil, o la contraseña, debes ir a ajustes."
+        android:text="@string/my_profile_settings"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"

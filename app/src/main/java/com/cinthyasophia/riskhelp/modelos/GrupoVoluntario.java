@@ -1,7 +1,6 @@
 package com.cinthyasophia.riskhelp.modelos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class GrupoVoluntario implements Serializable {
     private String id;
@@ -9,15 +8,13 @@ public class GrupoVoluntario implements Serializable {
     private String direccion;
     private String telefono;
     private String email;
-    private int codigoPostal;
-    private ArrayList<String> alertasRespondidas;
+    private int codigo_postal;
 
-    public GrupoVoluntario(String nombre, String direccion, String telefono, ArrayList<String> alertasRespondidas, int codigoPostal, String email) {
+    public GrupoVoluntario(String nombre, String direccion, String telefono, int codigo_postal, String email) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.codigoPostal = codigoPostal;
-        this.alertasRespondidas = alertasRespondidas;
+        this.codigo_postal = codigo_postal;
         this.email = email;
     }
 
@@ -45,12 +42,8 @@ public class GrupoVoluntario implements Serializable {
         return telefono;
     }
 
-    public int getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public ArrayList<String> getAlertasRespondidas() {
-        return alertasRespondidas;
+    public int getCodigo_postal() {
+        return codigo_postal;
     }
 
 }

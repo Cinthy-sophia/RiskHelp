@@ -13,10 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.cinthyasophia.riskhelp.R;
+import com.cinthyasophia.riskhelp.Util.Lib;
 import com.cinthyasophia.riskhelp.dialogos.DialogoGrupoVoluntario;
 import com.cinthyasophia.riskhelp.modelos.Alerta;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.GregorianCalendar;
 
 public class FragmentNuevaAlerta extends Fragment {
     private TextInputEditText tfNombre;
@@ -27,6 +30,7 @@ public class FragmentNuevaAlerta extends Fragment {
     private MaterialCheckBox cBAnonimo;
     private Button bContinuar;
     private boolean anonimo;
+    private Lib lib;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -38,6 +42,7 @@ public class FragmentNuevaAlerta extends Fragment {
         tfTelefono = view.findViewById(R.id.tfTelefono);
         cBAnonimo = view.findViewById(R.id.cBAnonimo);
         bContinuar = view.findViewById(R.id.bContinuar);
+        lib= new Lib();
 
         return view;
     }
@@ -45,7 +50,6 @@ public class FragmentNuevaAlerta extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //cBAnonimo.setOnClickListener();
         cBAnonimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -54,6 +58,7 @@ public class FragmentNuevaAlerta extends Fragment {
                     tfNombre.setText("");
                     anonimo = true;
                 }else{
+                    tfNombre.setEnabled(true);
                     anonimo = false;
                 }
             }
@@ -62,17 +67,17 @@ public class FragmentNuevaAlerta extends Fragment {
         bContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tfNombre.getText().toString().isEmpty() || tfDireccion.getText().toString().isEmpty()
+                if ((!cBAnonimo.isChecked() && tfNombre.getText().toString().isEmpty()) || tfDireccion.getText().toString().isEmpty()
                         || tfDescripcion.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()){
                     Toast.makeText(getContext(),R.string.empty_field,Toast.LENGTH_LONG).show();
 
                 }else{
-                    Alerta alerta = new Alerta(tfDescripcion.getText().toString(),tfDireccion.getText().toString(),anonimo,tfNombre.getText().toString(),tfTelefono.getText().toString(),null,Integer.parseInt(tfCodigoPostal.getText().toString()));
-                    DialogoGrupoVoluntario dialogoTipoUsuario = new DialogoGrupoVoluntario();
+                    Alerta alerta = new Alerta(tfDescripcion.getText().toString(),tfDireccion.getText().toString(),anonimo,tfNombre.getText().toString(),tfTelefono.getText().toString(),null,Integer.parseInt(tfCodigoPostal.getText().toString()),lib.getFecha(new GregorianCalendar()));
+                    DialogoGrupoVoluntario dialogoGrupoVoluntario = new DialogoGrupoVoluntario();
                     Bundle fragment = new Bundle();
                     fragment.putSerializable("nuevaAlerta",alerta);
-                    dialogoTipoUsuario.setArguments(fragment);
-                    dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+                    dialogoGrupoVoluntario.setArguments(fragment);
+                    dialogoGrupoVoluntario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
                 }
                 tfNombre.setText("");
                 tfDescripcion.setText("");

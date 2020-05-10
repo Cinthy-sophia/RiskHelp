@@ -70,7 +70,7 @@ public class FragmentInicio extends Fragment {
         bEmergencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo iniciar fragmentnewAlert
+                iniciarFragmentNuevaAlerta();
 
             }
         });
@@ -89,6 +89,11 @@ public class FragmentInicio extends Fragment {
             }
         });
     }
+
+    /**
+     * Inicia el Dialogo para que el usuario elija el tipo de usuario que será/es
+     * @param fragmentTipo
+     */
     public void iniciarDialogoTipoUsuario(String fragmentTipo) {
         DialogoTipoUsuario dialogoTipoUsuario = new DialogoTipoUsuario();
         Bundle fragment = new Bundle();
@@ -96,6 +101,14 @@ public class FragmentInicio extends Fragment {
         dialogoTipoUsuario.setArguments(fragment);
         dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
 
+    }
+
+    /**
+     * Inicia el FragmentNuevaAlerta para que el usuario pueda mandar una alerta.
+     */
+    public void iniciarFragmentNuevaAlerta(){
+        FragmentNuevaAlerta fragmentNuevaAlerta = new FragmentNuevaAlerta();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio, fragmentNuevaAlerta).commit();
     }
 
     /**

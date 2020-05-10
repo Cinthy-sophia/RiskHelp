@@ -2,6 +2,7 @@ package com.cinthyasophia.riskhelp.dialogos;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.cinthyasophia.riskhelp.R;
+import com.cinthyasophia.riskhelp.adapters.GrupoAdapter;
 import com.cinthyasophia.riskhelp.modelos.Alerta;
 import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,18 +33,22 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class DialogoGrupoVoluntario extends DialogFragment {
-    private ArrayAdapter adaptador;
+    private GrupoAdapter adapter;
     private ArrayList<String> items;
     private ArrayList<GrupoVoluntario> grupos;
     private FirebaseFirestore database;
-    private ListView listGrupos;
+    private RecyclerView rvGrupos;
     private Alerta nuevaAlerta;
+    private FirestoreRecyclerOptions<GrupoVoluntario> options;
+    private CollectionReference coleccion;
 
     @NonNull
     @Override
@@ -46,59 +57,71 @@ public class DialogoGrupoVoluntario extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialogo_grupo_voluntario, null);
         builder.setView(layout);
-        nuevaAlerta = (Alerta) getArguments().getSerializable("nuevaAlerta");
+
+        nuevaAlerta = (Alerta) getArguments().getSerializable("nuevaAlerta");//Recibe la nueva alerta creada en el fragment anterior.
         database = FirebaseFirestore.getInstance();
         items = new ArrayList<>();
-        grupos= obtenerGrupos(nuevaAlerta.getCodigoPostal());
-        listGrupos = layout.findViewById(R.id.listGrupos);
-        adaptador = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, items);
-        cargarDatos();
-        listGrupos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                crearNuevaAlerta(nuevaAlerta, (GrupoVoluntario) listGrupos.getItemAtPosition(position));
+        grupos = new ArrayList<>();
+        rvGrupos = layout.findViewById(R.id.rvGrupos);
+        coleccion = database.collection("grupos_voluntarios");
 
-                //getDialog().dismiss();
+        obtenerGrupos();
+        if (grupos.size()!=0){
+            Toast.makeText(getActivity(),"Lo sentimos pero no hay grupos disponibles en tu zona, te pedimos que llames a los numeros de emergencia: 112,012",Toast.LENGTH_LONG).show();
+            dismiss();
+        }
+
+        Query query = coleccion.whereEqualTo("codigo_postal",nuevaAlerta.getCodigo_postal());
+        options = new FirestoreRecyclerOptions.Builder<GrupoVoluntario>()
+                .setQuery(query,GrupoVoluntario.class)
+                .build();
+        adapter = new GrupoAdapter(options);
+        rvGrupos.setAdapter(adapter);
+        rvGrupos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        rvGrupos.addItemDecoration(dividerItemDecoration);
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearNuevaAlerta(nuevaAlerta, grupos.get(rvGrupos.getChildAdapterPosition(v)));
+                dismiss();
             }
+
         });
+
+        adapter.startListening();
+        builder.setTitle(R.string.select_volunteer_group+":");
 
         return builder.create();
 
     }
 
-    private void cargarDatos() {
-        adaptador.clear();
-        for (GrupoVoluntario grupo : grupos){
-            adaptador.insert(grupo.getNombre(),adaptador.getCount());
-        }
-        adaptador.notifyDataSetChanged();
-
-    }
-
-    /**
-     * Obtiene los grupos que tengan el mismo codigo postal indicado por el usuario al crear una
-     * nueva alerta.
-     * @param codigoPostal
-     * @return
-     */
-    private ArrayList<GrupoVoluntario> obtenerGrupos(int codigoPostal){
-        final ArrayList<GrupoVoluntario> grupos = new ArrayList<>();
-        CollectionReference coleccion = database.collection("grupos_voluntarios");
-        coleccion.whereEqualTo("codigo_postal",codigoPostal).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void obtenerGrupos(){
+        coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 GrupoVoluntario g;
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("LOS DATOS", document.getId() + " => " + document.getData());
-                        g=document.toObject(GrupoVoluntario.class);
+                        g = document.toObject(GrupoVoluntario.class);
+
                         grupos.add(g);
                     }
+                } else {
+                    Log.d("LOS DATOS", "Error getting documents: ", task.getException());
                 }
             }
         });
-        return grupos;
     }
+
+
+    /**
+     * Guarda la nueva alerta creada en la base de datos.
+     * @param alerta
+     * @param itemAtPosition
+     */
     private void crearNuevaAlerta(Alerta alerta, GrupoVoluntario itemAtPosition){
         alerta.setGrupo(itemAtPosition.getNombre());
         CollectionReference coleccion = database.collection("alertas");
@@ -107,16 +130,9 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //Si ha sido correcto muestra un mensaje de exito
-                        Snackbar snack = Snackbar.make(getView(), "La alerta ha sido creada con éxito.", Snackbar.LENGTH_INDEFINITE);
-                        snack.setAction("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Respond to the click, such as by undoing the modification that caused
-                                // this message to be displayed
-                                Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        snack.show();
+
+                        Toast.makeText(getActivity(),R.string.new_alert_correct,Toast.LENGTH_LONG).show();
+
 
                     }
                 })
@@ -124,17 +140,9 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Si algo ha fallado
-                        Snackbar snack = Snackbar.make(getView(), "La alerta NO ha sido creada con éxito. Intente de nuevo.", Snackbar.LENGTH_INDEFINITE);
-                        snack.setAction("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Respond to the click, such as by undoing the modification that caused
-                                // this message to be displayed
-                                Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        snack.show();
+                        Toast.makeText(getActivity(),R.string.new_alert_error,Toast.LENGTH_LONG).show();
                     }
                 });
     }
+
 }
