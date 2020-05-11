@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_width="79dp"
-        android:layout_height="28dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/name"
         android:textAlignment="viewStart"
@@ -19,77 +19,50 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.155" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="229dp"
+        android:layout_height="79dp"
+        app:boxBackgroundColor="#43FFFFFF"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tfTelefono"
+            android:layout_width="199dp"
+            android:layout_height="58dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="number"
+            android:padding="0dp"
+            android:textColor="#FFFFFF" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
+        android:layout_width="232dp"
+        android:layout_height="31dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/password"
+        android:text="@string/email_address"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="223dp"
-        android:layout_height="72dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:textColorHint="#FFFFFF"
-        app:boxBackgroundColor="#43FFFFFF"
-        app:boxBackgroundMode="outline"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfApellidoODireccion"
-            android:layout_width="199dp"
-            android:layout_height="58dp"
-            android:fontFamily="sans-serif-smallcaps"
-            android:padding="0dp"
-            android:textColor="#FFFFFF" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="223dp"
-        android:layout_height="72dp"
-        android:fontFamily="sans-serif-smallcaps"
-        app:boxBackgroundColor="#43FFFFFF"
-        app:boxBackgroundMode="outline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
-        app:passwordToggleEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfCodigoPostal"
-            android:layout_width="199dp"
-            android:layout_height="58dp"
-            android:inputType="number"
-            android:fontFamily="sans-serif-smallcaps"
-            android:padding="0dp"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintVertical_bias="0.574" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="199dp"
@@ -99,10 +72,10 @@
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935"
+        app:layout_constraintVertical_bias="0.798"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -117,8 +90,40 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:layout_width="133dp"
+        android:layout_height="28dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="@string/telephone"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
+
+    <TextView
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="@string/password"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.715" />
+
+    <TextView
         android:layout_width="144dp"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/postal_code"
         android:textAlignment="viewStart"
@@ -127,10 +132,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.557" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="222dp"
@@ -140,10 +145,10 @@
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78">
+        app:layout_constraintVertical_bias="0.642">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tfEmail"
@@ -156,75 +161,27 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="133dp"
-        android:layout_height="28dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/telephone"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <TextView
-        android:layout_width="232dp"
-        android:layout_height="31dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/email_address"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
-
-    <TextView
-        android:id="@+id/tvApellidoODireccion"
-        android:layout_width="116dp"
-        android:layout_height="25dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/last_name"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="229dp"
-        android:layout_height="79dp"
+        android:layout_width="223dp"
+        android:layout_height="72dp"
+        android:fontFamily="sans-serif-smallcaps"
         app:boxBackgroundColor="#43FFFFFF"
         app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.488">
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tfTelefono"
+            android:id="@+id/tfCodigoPostal"
             android:layout_width="199dp"
-            android:inputType="number"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
+            android:inputType="number"
             android:padding="0dp"
+            android:textAlignment="viewStart"
             android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -288,10 +245,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.928" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

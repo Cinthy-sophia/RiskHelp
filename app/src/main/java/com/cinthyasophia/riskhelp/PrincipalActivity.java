@@ -56,15 +56,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                iniciarFragmentNuevaAlerta();
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -80,19 +71,39 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         tvNombreUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         tvEmailUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        usuarios = new ArrayList<>();
+
         database = FirebaseFirestore.getInstance();
         coleccion = database.collection("usuarios");
 
-        obtenerUsuarios();
-
-
-        tipoUsuario = "GRUPO_VOLUNTARIO";
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(tvEmailUsuario.getText().toString()) && !u.isVoluntario()) {
-                tipoUsuario = "USUARIO";
+        coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    Usuario u;
+                    tipoUsuario = "USUARIO";
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("LAS ALERTAS", document.getId() + " => " + document.getData());
+                        u=document.toObject(Usuario.class);
+                        if (u.getEmail().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getEmail()) && u.isVoluntario()){
+                            tipoUsuario = "GRUPO_VOLUNTARIO";
+                        }
+                    }
+                }
             }
+        });
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iniciarFragmentNuevaAlerta();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+            }
+        });
+
+        if (tipoUsuario.equalsIgnoreCase("GRUPO_VOLUNTARIO")){
+            fab.hide();
         }
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -108,16 +119,19 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentNuevaAlerta).commit();
     }
 
-    public void obtenerUsuarios() {
+    public void verificarUsuario() {
         coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     Usuario u;
+                    tipoUsuario = "USUARIO";
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("LAS ALERTAS", document.getId() + " => " + document.getData());
                         u=document.toObject(Usuario.class);
-                        usuarios.add(u);
+                        if (u.getEmail().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getEmail()) && u.isVoluntario()){
+                            tipoUsuario = "GRUPO_VOLUNTARIO";
+                        }
                     }
                 }
             }

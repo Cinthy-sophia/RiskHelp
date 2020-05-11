@@ -84,7 +84,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
         });
 
         adapter.startListening();
-        builder.setTitle(R.string.select_volunteer_group+":");
+        builder.setTitle(R.string.select_volunteer_group);
 
         return builder.create();
 

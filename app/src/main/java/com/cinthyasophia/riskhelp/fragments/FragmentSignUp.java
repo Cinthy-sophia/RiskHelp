@@ -39,7 +39,6 @@ public class FragmentSignUp extends Fragment {
     private TextView tvMessage;
     private TextView tvApellidoODireccion;
     private TextInputEditText tfNombre;
-    private TextInputEditText tfApellidoODireccion;
     private TextInputEditText tfTelefono;
     private TextInputEditText tfCodigoPostal;
     private TextInputEditText tfEmail;
@@ -63,7 +62,6 @@ public class FragmentSignUp extends Fragment {
 
         //Text Fields
         tfNombre = view.findViewById(R.id.tfNombre);
-        tfApellidoODireccion = view.findViewById(R.id.tfApellidoODireccion);
         tfTelefono = view.findViewById(R.id.tfTelefono);
         tfCodigoPostal = view.findViewById(R.id.tfCodigoPostal);
         tfEmail = view.findViewById(R.id.tfEmail);
@@ -97,8 +95,7 @@ public class FragmentSignUp extends Fragment {
         bSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tfNombre.getText().toString().isEmpty() || tfApellidoODireccion.getText().toString().isEmpty()
-                || tfCodigoPostal.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()){
+                if (tfNombre.getText().toString().isEmpty() || tfCodigoPostal.getText().toString().isEmpty() || tfTelefono.getText().toString().isEmpty()){
                     Toast.makeText(getContext(),R.string.empty_field,Toast.LENGTH_LONG).show();
 
                 }else if(tfEmail.getText().toString().isEmpty()){
@@ -144,7 +141,7 @@ public class FragmentSignUp extends Fragment {
 
                                             break;
                                     }
-                                    Usuario nuevoUsuario = new Usuario(tfNombre.getText().toString(),tfApellidoODireccion.getText().toString(),tfEmail.getText().toString(),tfTelefono.getText().toString(),Integer.parseInt(tfCodigoPostal.getText().toString()),voluntario);
+                                    Usuario nuevoUsuario = new Usuario(tfNombre.getText().toString(),tfEmail.getText().toString(),tfTelefono.getText().toString(),Integer.parseInt(tfCodigoPostal.getText().toString()),voluntario);
 
                                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -166,7 +163,6 @@ public class FragmentSignUp extends Fragment {
 
                                     tfEmail.setText("");
                                     tfNombre.setText("");
-                                    tfApellidoODireccion.setText("");
                                     tfTelefono.setText("");
                                     tfCodigoPostal.setText("");
                                     tfPassword.setText("");

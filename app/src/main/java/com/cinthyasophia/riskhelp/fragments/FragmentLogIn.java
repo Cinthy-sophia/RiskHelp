@@ -43,6 +43,7 @@ public class FragmentLogIn extends Fragment {
         tfEmail = view.findViewById(R.id.tfEmail);
         tfPassword = view.findViewById(R.id.tfPassword);
         tvMessageLogIn = view.findViewById(R.id.tvMessageLogIn);
+        tipoUsuario = getArguments().getString("tipoUsuario");
         return view;
     }
 
@@ -69,6 +70,8 @@ public class FragmentLogIn extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
+                                    tfEmail.setText("");
+                                    tfPassword.setText("");
                                     iniciarActivityPrincipal();
                                 }
                             })

@@ -18,10 +18,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
         android:id="@+id/textView11"
@@ -45,13 +45,14 @@
         android:layout_width="231dp"
         android:layout_height="53dp"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="7dp"
         android:layout_marginEnd="92dp"
         android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/risk_help_logo" />
 
     <TextView
@@ -283,16 +284,16 @@
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/cBAnonimo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="34dp"
+        android:layout_height="48dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintHorizontal_bias="0.57"
         app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/bContinuar"

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,8 +19,9 @@ import com.cinthyasophia.riskhelp.fragments.FragmentLogIn;
 import com.cinthyasophia.riskhelp.fragments.FragmentSignUp;
 
 public class DialogoTipoUsuario extends DialogFragment{
-    DialogInterface.OnClickListener listenerUsuarioRegular;
-    DialogInterface.OnClickListener listenerGrupoVoluntario;
+    private DialogInterface.OnClickListener listenerUsuarioRegular;
+    private DialogInterface.OnClickListener listenerGrupoVoluntario;
+    private TextView tvDialogo;
 
     @NonNull
     @Override
@@ -29,6 +31,19 @@ public class DialogoTipoUsuario extends DialogFragment{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialogo_tipo_usuario, null);
         builder.setView(layout);
+        tvDialogo = layout.findViewById(R.id.tvDialogo);
+
+        switch (fragment){
+            case "LOG_IN":
+                tvDialogo.setText(R.string.dialog_log_in_message);
+                break;
+            case "SIGN_UP":
+                tvDialogo.setText(R.string.dialog_sign_up_message);
+                break;
+            default:
+                break;
+        }
+
         listenerUsuarioRegular = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -44,6 +59,7 @@ public class DialogoTipoUsuario extends DialogFragment{
                 }
             }
         };
+
         listenerGrupoVoluntario = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
