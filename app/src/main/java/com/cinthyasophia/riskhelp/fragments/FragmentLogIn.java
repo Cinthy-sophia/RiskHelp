@@ -16,12 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.cinthyasophia.riskhelp.MainActivity;
 import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
+import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 public class FragmentLogIn extends Fragment {
     private final int PASSWORD_MIN_SIZE = 6;
@@ -39,8 +42,7 @@ public class FragmentLogIn extends Fragment {
         bEntrar = view.findViewById(R.id.bEntrar);
         tfEmail = view.findViewById(R.id.tfEmail);
         tfPassword = view.findViewById(R.id.tfPassword);
-        tipoUsuario = getArguments().getString("tipoUsuario");
-        tvMessageLogIn = view.findViewById(R.id.tvMessage);
+        tvMessageLogIn = view.findViewById(R.id.tvMessageLogIn);
         return view;
     }
 
@@ -93,7 +95,6 @@ public class FragmentLogIn extends Fragment {
     }
     public void iniciarActivityPrincipal(){
         Intent i = new Intent(getContext(), PrincipalActivity.class);
-        i.putExtra("tipoUsuario",tipoUsuario);
         startActivity(i);
         getActivity().finish();
     }

@@ -44,7 +44,7 @@ public class FragmentInicio extends Fragment {
                     .getCurrentUser()
                     .getDisplayName());*/
 
-           // iniciarActivityPrincipal(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getEmail());
+           iniciarActivityPrincipal(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         }
 

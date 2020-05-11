@@ -15,12 +15,11 @@ public class Alerta implements Serializable {
     private String telefono;
     private String grupo;
     private int codigo_postal;
-    private GregorianCalendar FechaHora;
-    private Lib lib;
+    private GregorianCalendar fechaHora;
+    private Lib lib = new Lib();
 
 
-    public Alerta(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String grupo, int codigo_postal, String FechaHora) {
-        lib = new Lib();
+    public Alerta(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String grupo, int codigo_postal, String fechaHora) {
         this.descripcion = descripcion;
         this.direccion = direccion;
         this.anonimo = anonimo;
@@ -32,14 +31,18 @@ public class Alerta implements Serializable {
         this.telefono = telefono;
         this.grupo = grupo;
         this.codigo_postal = codigo_postal;
-        this.FechaHora =lib.getFecha(FechaHora);
+        this.fechaHora =lib.getFecha(fechaHora);
     }
 
     public Alerta() {
     }
 
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = lib.getFecha(fechaHora);
+    }
+
     public String getFechaHora() {
-        return lib.getFecha(FechaHora);
+        return lib.getFecha(fechaHora);
     }
 
     public void setTomada(boolean tomada) {

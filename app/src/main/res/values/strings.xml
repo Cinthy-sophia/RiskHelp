@@ -35,7 +35,6 @@
     <string name="menu_untaken_alerts">Untaken Alerts</string>
 
     <string name="home_second" translatable="false">Received Alerts</string>
-    <string name="menu_alerts">Reports</string>
     <string name="menu_my_profile">My Profile</string>
     <string name="log_out">Log Out</string>
     <string name="description">Description</string>
@@ -54,6 +53,7 @@
     <string name="select_volunteer_group">Select a volunteer group</string>
     <string name="new_alert_correct">The alert has been successfully created.</string>
     <string name="new_alert_error">The alert has not been created.</string>
+    <string name="menu_alerts">Alerts</string>
 
 
 </resources>

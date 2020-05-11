@@ -26,26 +26,23 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class FragmentMiPerfil extends Fragment {
     private ImageView ivFotoPerfil;
     private TextView tvNombre;
-    private TextView tvApeODir;
-    private TextView tvApellidoODireccion;
     private TextView tvCodigoPostal;
     private TextView tvTelefono;
     private TextView tvEmail;
     private FirebaseFirestore database;
-    private String tipoUsuario;
     private String email;//Con el email busco el usuario o grupo voluntario y muestro los datos necesarios
-    private Object usuario;
+    private Usuario usuario;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mi_perfil, container, false);
-        tipoUsuario = getArguments().getString("tipoUsuario");
+        database = FirebaseFirestore.getInstance();
         email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);//todo colocar la imagen segun la uri indicada
         tvNombre = view.findViewById(R.id.tvNombre);
-        tvApeODir = view.findViewById(R.id.tvApeODir);
-        tvApellidoODireccion = view.findViewById(R.id.tvApellidoODireccion);
         tvCodigoPostal = view.findViewById(R.id.tvCodigoPostal);
         tvTelefono = view.findViewById(R.id.tvTelefono);
         tvEmail = view.findViewById(R.id.tvEmail);
+
+
         return view;
     }
 
@@ -53,28 +50,24 @@ public class FragmentMiPerfil extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //Con el correo obtengo el usuario o grupo y lo guardo en el objeto, según el tipo de usuario recibido mostrara los datos
-        if(tipoUsuario.equalsIgnoreCase("USUARIO")){
-            tvApeODir.setText(R.string.last_name);
-            usuario = buscarUsuarioPorEmail(email);
-            if (usuario != null){
-                tvNombre.setText(((Usuario) usuario).getNombre());
-                tvApellidoODireccion.setText(((Usuario) usuario).getApellido());
-                tvEmail.setText(((Usuario) usuario).getEmail());
-                tvTelefono.setText(((Usuario) usuario).getTelefono());
-                tvCodigoPostal.setText(((Usuario) usuario).getCodigoPostal());
+        CollectionReference coleccion = database.collection("usuarios");
+        coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        usuario = document.toObject(Usuario.class);
+                        if(usuario.getEmail().equalsIgnoreCase(email)){
+                            tvNombre.setText(usuario.getNombre());
+                            tvEmail.setText(usuario.getEmail());
+                            tvTelefono.setText(String.valueOf(usuario.getTelefono()));
+                            tvCodigoPostal.setText(String.valueOf(usuario.getCodigoPostal()));
+                        }
+                    }
+                }
             }
+        });
 
-        }else if(tipoUsuario.equalsIgnoreCase("GRUPO_VOLUNTARIO")){
-            tvApeODir.setText(R.string.address);
-            usuario = buscarGrupoVoluntarioPorEmail();
-            if (usuario != null){
-                tvNombre.setText(((GrupoVoluntario) usuario).getNombre());
-                tvApellidoODireccion.setText(((GrupoVoluntario) usuario).getDireccion());
-                tvEmail.setText(((GrupoVoluntario) usuario).getEmail());
-                tvTelefono.setText(((GrupoVoluntario) usuario).getTelefono());
-                tvCodigoPostal.setText(((GrupoVoluntario) usuario).getCodigo_postal());
-            }
-        }
 
     }
     public Usuario buscarUsuarioPorEmail(String email){
@@ -94,21 +87,5 @@ public class FragmentMiPerfil extends Fragment {
         });
         return u[0];
     }
-    public GrupoVoluntario buscarGrupoVoluntarioPorEmail(){
-        final GrupoVoluntario[] u = new GrupoVoluntario[1];
-        CollectionReference coleccion = database.collection("usuarios");
-        Query query = coleccion.whereEqualTo("email",email);
 
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        u[0] = document.toObject(GrupoVoluntario.class);
-                    }
-                }
-            }
-        });
-        return u[0];
-    }
 }

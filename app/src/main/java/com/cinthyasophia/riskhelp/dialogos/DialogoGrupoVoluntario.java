@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,13 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cinthyasophia.riskhelp.R;
 import com.cinthyasophia.riskhelp.adapters.GrupoAdapter;
 import com.cinthyasophia.riskhelp.modelos.Alerta;
-import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
+import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,16 +34,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class DialogoGrupoVoluntario extends DialogFragment {
     private GrupoAdapter adapter;
-    private ArrayList<String> items;
-    private ArrayList<GrupoVoluntario> grupos;
+    private ArrayList<Usuario> gruposVoluntarios;
     private FirebaseFirestore database;
     private RecyclerView rvGrupos;
     private Alerta nuevaAlerta;
-    private FirestoreRecyclerOptions<GrupoVoluntario> options;
+    private FirestoreRecyclerOptions<Usuario> options;
     private CollectionReference coleccion;
 
     @NonNull
@@ -60,30 +54,30 @@ public class DialogoGrupoVoluntario extends DialogFragment {
 
         nuevaAlerta = (Alerta) getArguments().getSerializable("nuevaAlerta");//Recibe la nueva alerta creada en el fragment anterior.
         database = FirebaseFirestore.getInstance();
-        items = new ArrayList<>();
-        grupos = new ArrayList<>();
+        gruposVoluntarios = new ArrayList<>();
         rvGrupos = layout.findViewById(R.id.rvGrupos);
-        coleccion = database.collection("grupos_voluntarios");
+        coleccion = database.collection("usuarios");
 
         obtenerGrupos();
-        if (grupos.size()!=0){
+        if (gruposVoluntarios.size()!=0){
             Toast.makeText(getActivity(),"Lo sentimos pero no hay grupos disponibles en tu zona, te pedimos que llames a los numeros de emergencia: 112,012",Toast.LENGTH_LONG).show();
             dismiss();
         }
 
-        Query query = coleccion.whereEqualTo("codigo_postal",nuevaAlerta.getCodigo_postal());
-        options = new FirestoreRecyclerOptions.Builder<GrupoVoluntario>()
-                .setQuery(query,GrupoVoluntario.class)
+        Query query = coleccion.whereEqualTo("codigo_postal",nuevaAlerta.getCodigo_postal()).whereEqualTo("voluntario",true);
+        options = new FirestoreRecyclerOptions.Builder<Usuario>()
+                .setQuery(query,Usuario.class)
                 .build();
         adapter = new GrupoAdapter(options);
         rvGrupos.setAdapter(adapter);
         rvGrupos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         rvGrupos.addItemDecoration(dividerItemDecoration);
+
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearNuevaAlerta(nuevaAlerta, grupos.get(rvGrupos.getChildAdapterPosition(v)));
+                crearNuevaAlerta(nuevaAlerta, gruposVoluntarios.get(rvGrupos.getChildAdapterPosition(v)));
                 dismiss();
             }
 
@@ -101,13 +95,14 @@ public class DialogoGrupoVoluntario extends DialogFragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                GrupoVoluntario g;
+                Usuario grupo;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("LOS DATOS", document.getId() + " => " + document.getData());
-                        g = document.toObject(GrupoVoluntario.class);
-
-                        grupos.add(g);
+                        grupo = document.toObject(Usuario.class);
+                        if (grupo.isVoluntario()){
+                            gruposVoluntarios.add(grupo);
+                        }
                     }
                 } else {
                     Log.d("LOS DATOS", "Error getting documents: ", task.getException());
@@ -122,7 +117,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
      * @param alerta
      * @param itemAtPosition
      */
-    private void crearNuevaAlerta(Alerta alerta, GrupoVoluntario itemAtPosition){
+    private void crearNuevaAlerta(Alerta alerta, Usuario itemAtPosition){
         alerta.setGrupo(itemAtPosition.getNombre());
         CollectionReference coleccion = database.collection("alertas");
         coleccion.add(alerta)

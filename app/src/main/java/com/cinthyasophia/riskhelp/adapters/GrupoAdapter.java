@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cinthyasophia.riskhelp.R;
 import com.cinthyasophia.riskhelp.dialogos.DialogoGrupoVoluntario;
 import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
+import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class GrupoAdapter extends FirestoreRecyclerAdapter<GrupoVoluntario, GrupoAdapter.GrupoViewHolder> implements View.OnClickListener{
+public class GrupoAdapter extends FirestoreRecyclerAdapter<Usuario, GrupoAdapter.GrupoViewHolder> implements View.OnClickListener{
     private View.OnClickListener listener;
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -22,7 +23,7 @@ public class GrupoAdapter extends FirestoreRecyclerAdapter<GrupoVoluntario, Grup
      *
      * @param options
      */
-    public GrupoAdapter(@NonNull FirestoreRecyclerOptions<GrupoVoluntario> options) {
+    public GrupoAdapter(@NonNull FirestoreRecyclerOptions<Usuario> options) {
         super(options);
 
     }
@@ -41,7 +42,7 @@ public class GrupoAdapter extends FirestoreRecyclerAdapter<GrupoVoluntario, Grup
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull GrupoViewHolder grupoViewHolder, int i, @NonNull GrupoVoluntario grupoVoluntario) {
+    protected void onBindViewHolder(@NonNull GrupoViewHolder grupoViewHolder, int i, @NonNull Usuario grupoVoluntario) {
         grupoViewHolder.tvGrupoVoluntario.setText(grupoVoluntario.getNombre());
     }
 

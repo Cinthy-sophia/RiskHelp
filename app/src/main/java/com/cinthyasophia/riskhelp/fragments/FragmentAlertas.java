@@ -46,46 +46,24 @@ public class FragmentAlertas extends Fragment {
         super.onActivityCreated(savedInstanceState);
         coleccion = database.collection("alertas");
         Query query = coleccion.orderBy("grupo");
-        /*coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    Alerta a;
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("LAS ALERTAS", document.getId() + " => " + document.getData());
-
-                        a=document.toObject(Alerta.class);
-                        alertas.add(a);
-                    }
-                }
-            }
-        });*/
+        
         Bundle b = getArguments();
         if (b!=null){
             tipoUsuario = b.getString("tipoUsuario");
+            String nombreUsuario = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
             if(tipoUsuario.equalsIgnoreCase("GRUPO_VOLUNTARIO")){
-                //for (Alerta alerta: alertas) {
-                    /*if (!alerta.getGrupo().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())){
-                        alertas.remove(alerta);
-                    }*/
-                //}
-                String nombreGrupo = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
                 if(b.containsKey("ALERTAS_NO_TOMADAS")){
-                    query = coleccion.whereEqualTo("tomada",false).whereEqualTo("grupo",nombreGrupo);
+                    query = coleccion.whereEqualTo("tomada",false).whereEqualTo("grupo",nombreUsuario);
                 }else if(b.containsKey("ALERTAS_TOMADAS")) {
-                    query = coleccion.whereEqualTo("tomada",true).whereEqualTo("grupo",nombreGrupo);
+                    query = coleccion.whereEqualTo("tomada",true).whereEqualTo("grupo",nombreUsuario);
                 }else{
-                    query = coleccion.whereEqualTo("grupo",nombreGrupo);
+                    query = coleccion.whereEqualTo("grupo",nombreUsuario);
 
                 }
             }else if (tipoUsuario.equalsIgnoreCase("USUARIO")){
-                /*for (Alerta alerta: alertas) {
-                    if (!alerta.getDenunciante().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())){
-                        alertas.remove(alerta);
-                    }
-                }*/
 
-                String nombreUsuario = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                 if(b.containsKey("ALERTAS_NO_TOMADAS")){
                     query = coleccion.whereEqualTo("tomada",false).whereEqualTo("denunciante",nombreUsuario);
                 }else if(b.containsKey("ALERTAS_TOMADAS")) {
@@ -98,7 +76,7 @@ public class FragmentAlertas extends Fragment {
             }
         }
         //Ordenamos las alertas en funcion de la hora en la que se reciben.
-        query.orderBy("FechaHora", Query.Direction.ASCENDING);
+        query.orderBy("fechaHora", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<Alerta> options = new FirestoreRecyclerOptions.Builder<Alerta>()
                 .setQuery(query,Alerta.class)

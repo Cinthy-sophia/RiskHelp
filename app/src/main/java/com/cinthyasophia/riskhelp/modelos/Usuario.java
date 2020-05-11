@@ -10,19 +10,24 @@ public class Usuario implements Serializable {
     private String email;
     private String telefono;
     private int codigoPostal;
-    private ArrayList<String> alertas_hechas;
+    private boolean voluntario;
 
-    public Usuario(String nombre, String apellido, String email, String telefono, int codigoPostal, ArrayList<String> alertas_hechas) {
+    public Usuario(String nombre, String apellido, String email, String telefono, int codigoPostal, boolean voluntario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
         this.codigoPostal = codigoPostal;
-        this.alertas_hechas = alertas_hechas;
+        this.voluntario = true;
+
     }
 
     public Usuario() {
 
+    }
+
+    public boolean isVoluntario() {
+        return voluntario;
     }
 
     public String getId() {
@@ -49,7 +54,4 @@ public class Usuario implements Serializable {
         return codigoPostal;
     }
 
-    public ArrayList<String> getAlertas_hechas() {
-        return alertas_hechas;
-    }
 }

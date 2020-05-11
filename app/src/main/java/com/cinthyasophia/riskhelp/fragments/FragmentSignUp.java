@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment;
 import com.cinthyasophia.riskhelp.MainActivity;
 import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
+import com.cinthyasophia.riskhelp.modelos.Alerta;
+import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
+import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +30,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FragmentSignUp extends Fragment {
     private final int PASSWORD_MIN_SIZE = 6;
@@ -38,8 +44,10 @@ public class FragmentSignUp extends Fragment {
     private TextInputEditText tfCodigoPostal;
     private TextInputEditText tfEmail;
     private TextInputEditText tfPassword;
+    private boolean voluntario;
     private Button bSiguiente;
     private String tipoUsuario;
+    private FirebaseFirestore database;
 
 
     @Nullable
@@ -63,6 +71,7 @@ public class FragmentSignUp extends Fragment {
         //Button
         bSiguiente = view.findViewById(R.id.bSiguiente);
 
+        database = FirebaseFirestore.getInstance();
         return view;
     }
 
@@ -107,6 +116,7 @@ public class FragmentSignUp extends Fragment {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    Log.e("ERROR",e.getMessage());
                                     Snackbar snack = Snackbar.make(getView(), R.string.sign_up_failure, Snackbar.LENGTH_INDEFINITE);
                                     snack.setAction("OK", new View.OnClickListener() {
                                         @Override
@@ -122,11 +132,26 @@ public class FragmentSignUp extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
-                                    FirebaseUser user = authResult.getUser();
+                                    switch (tipoUsuario){
+                                        case "USUARIO":
+                                            voluntario = false;
+                                            break;
+                                        case "GRUPO_VOLUNTARIO":
+                                            voluntario = true;
+
+                                            break;
+                                        default:
+
+                                            break;
+                                    }
+                                    Usuario nuevoUsuario = new Usuario(tfNombre.getText().toString(),tfApellidoODireccion.getText().toString(),tfEmail.getText().toString(),tfTelefono.getText().toString(),Integer.parseInt(tfCodigoPostal.getText().toString()),voluntario);
+
+                                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(tfNombre.getText().toString())
+                                            .setDisplayName(nuevoUsuario.getNombre())
                                             //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
                                             .build();
+
 
                                     user.updateProfile(profileUpdates)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -134,31 +159,54 @@ public class FragmentSignUp extends Fragment {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Log.d("INFO", "User profile updated.");
+                                                        Log.d("INFO", user.getDisplayName());
                                                     }
                                                 }
                                             });
+
+                                    tfEmail.setText("");
+                                    tfNombre.setText("");
+                                    tfApellidoODireccion.setText("");
+                                    tfTelefono.setText("");
+                                    tfCodigoPostal.setText("");
+                                    tfPassword.setText("");
+                                    crearNuevoUsuario(nuevoUsuario);
                                     iniciarActivityPrincipal();
                                 }
                             });
 
-
-
                 }
-                tfEmail.setText("");
-                tfNombre.setText("");
-                tfApellidoODireccion.setText("");
-                tfTelefono.setText("");
-                tfCodigoPostal.setText("");
-                tfPassword.setText("");
             }
 
 
         });
 
     }
+    private void crearNuevoUsuario(Usuario usuario){
+
+        CollectionReference coleccion = database.collection("usuarios");
+        coleccion.add(usuario)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Si ha sido correcto muestra un mensaje de exito
+
+                        Toast.makeText(getContext(),"Nuevo usuario creado correctamente.",Toast.LENGTH_LONG).show();
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Si algo ha fallado
+                        Toast.makeText(getActivity(),"El usuario no ha podido ser creado.",Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
     public void iniciarActivityPrincipal(){
-        Bundle b = new Bundle();
         Intent i = new Intent(getContext(),PrincipalActivity.class);
+        i.putExtra("tipoUsuario",tipoUsuario);
         startActivity(i);
         getActivity().finish();
     }

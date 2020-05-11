@@ -47,7 +47,7 @@
 
     <TextView
         android:layout_width="154dp"
-        android:layout_height="28dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/password"
         android:textAlignment="viewStart"
@@ -92,16 +92,15 @@
         android:layout_height="153dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/risk_help_logo" />
 
     <TextView
         android:id="@+id/tvMessageLogIn"
         android:layout_width="401dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/log_in_message_user"
         android:textAlignment="center"
@@ -110,15 +109,14 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintVertical_bias="0.284" />
 
     <Button
         android:id="@+id/bEntrar"
         android:layout_width="104dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
         android:text="@string/log_in"
         app:layout_constraintBottom_toBottomOf="parent"

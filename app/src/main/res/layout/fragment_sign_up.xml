@@ -83,6 +83,7 @@
             android:id="@+id/tfCodigoPostal"
             android:layout_width="199dp"
             android:layout_height="58dp"
+            android:inputType="number"
             android:fontFamily="sans-serif-smallcaps"
             android:padding="0dp"
             android:textAlignment="viewStart"
@@ -220,6 +221,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tfTelefono"
             android:layout_width="199dp"
+            android:inputType="number"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
             android:padding="0dp"
