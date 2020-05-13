@@ -1,12 +1,15 @@
 package com.cinthyasophia.riskhelp.adapters;
 
+import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cinthyasophia.riskhelp.IAlertaListener;
@@ -18,12 +21,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter.AlertaViewHolder> {
     private String tipoUsuario;
     private IAlertaListener listener;
+    private Context context;
 
-
-    public AlertaAdapter(FirestoreRecyclerOptions<Alerta> options, String tipoUsuario, IAlertaListener listener) {
+    public AlertaAdapter(FirestoreRecyclerOptions<Alerta> options, String tipoUsuario, IAlertaListener listener, Context context) {
         super(options);
         this.tipoUsuario = tipoUsuario;
         this.listener = listener;
+        this.context = context;
     }
 
     @NonNull
@@ -37,20 +41,35 @@ public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter
 
     @Override
     protected void onBindViewHolder(@NonNull AlertaViewHolder alertaViewHolder, int i, @NonNull Alerta alerta) {
+        alertaViewHolder.setAlerta(alerta);
         alertaViewHolder.tvNombre.setText(alerta.getDenunciante());
         alertaViewHolder.tvDescripcion.setText(alerta.getDescripcion());
         alertaViewHolder.tvDireccion.setText(alerta.getDireccion());
         alertaViewHolder.tvTelefono.setText(alerta.getTelefono());
         alertaViewHolder.tvGrupoV.setText(alerta.getGrupo());
         alertaViewHolder.tvFechaHora.setText(alerta.getFechaHora());
+        if (alerta.isTomada()){
+            alertaViewHolder.tvNombre.setTypeface(Typeface.DEFAULT);
+            alertaViewHolder.tvDescripcion.setTypeface(Typeface.DEFAULT);
+            alertaViewHolder.tvDireccion.setTypeface(Typeface.DEFAULT);
+            alertaViewHolder.tvTelefono.setTypeface(Typeface.DEFAULT);
+            alertaViewHolder.tvGrupoV.setTypeface(Typeface.DEFAULT);
+            alertaViewHolder.tvFechaHora.setTypeface(Typeface.DEFAULT);
+        }
     }
 
     @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
     public void onDataChanged() {
         super.onDataChanged();
-        if ("GRUPO_VOLUNTARIO".equals(tipoUsuario)){
-            //todo que lanze la notificación push de que hay una nueva alerta
-        }
+        notifyDataSetChanged();
+
 
     }
 
@@ -63,6 +82,7 @@ public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter
         private TextView tvTelefono;
         private TextView tvGrupoV;
         private TextView tvFechaHora;
+        private Alerta alerta;
 
         public AlertaViewHolder(@NonNull View itemView, String tipoUsuario, IAlertaListener listener) {
             super(itemView);
@@ -76,18 +96,16 @@ public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter
             this.listener = listener;
             itemView.setOnClickListener(this);
         }
+        protected void setAlerta(Alerta a){
+            this.alerta = a;
+        }
 
         @Override
         public void onClick(View v) {
             if(listener!=null){
-                if ("GRUPO_VOLUNTARIO".equals(tipoUsuario)) {
-                    listener.onAlertaClicked(getAdapterPosition(),tvDireccion.getText().toString());
-                    tvNombre.setTypeface(Typeface.DEFAULT);
-                    tvDescripcion.setTypeface(Typeface.DEFAULT);
-                    tvDireccion.setTypeface(Typeface.DEFAULT);
-                    tvTelefono.setTypeface(Typeface.DEFAULT);
-                    tvGrupoV.setTypeface(Typeface.DEFAULT);
-                    tvFechaHora.setTypeface(Typeface.DEFAULT);
+                //Si el usuario actual está marcado como voluntario se ejecuta el metodo de click de la alerta
+                if ("GRUPO_VOLUNTARIO".equals(tipoUsuario) && alerta!=null) {
+                    listener.onAlertaClicked(alerta,tvDireccion.getText().toString());
                 }
 
             }

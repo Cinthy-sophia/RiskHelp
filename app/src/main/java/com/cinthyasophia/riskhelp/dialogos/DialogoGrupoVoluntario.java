@@ -2,6 +2,7 @@ package com.cinthyasophia.riskhelp.dialogos;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
     private FirestoreRecyclerOptions<Usuario> options;
     private CollectionReference coleccion;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -58,13 +60,18 @@ public class DialogoGrupoVoluntario extends DialogFragment {
         rvGrupos = layout.findViewById(R.id.rvGrupos);
         coleccion = database.collection("usuarios");
 
+
         obtenerGrupos();
+
         if (gruposVoluntarios.size()!=0){
             Toast.makeText(getActivity(),"Lo sentimos pero no hay grupos disponibles en tu zona, te pedimos que llames a los numeros de emergencia: 112,012",Toast.LENGTH_LONG).show();
             dismiss();
+            //todo traducir en string
         }
-
+        //Se obtiene en el query los usuarios marcados como voluntarios y que tengan el mismo codigo postal que el de la nueva alerta
         Query query = coleccion.whereEqualTo("codigo_postal",nuevaAlerta.getCodigo_postal()).whereEqualTo("voluntario",true);
+
+
         options = new FirestoreRecyclerOptions.Builder<Usuario>()
                 .setQuery(query,Usuario.class)
                 .build();
@@ -90,6 +97,9 @@ public class DialogoGrupoVoluntario extends DialogFragment {
 
     }
 
+    /**
+     * Se obtienen todos los usuarios voluntarios y se guardan en un ArrayList como grupos voluntarios.
+     */
     public void obtenerGrupos(){
         coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -117,14 +127,15 @@ public class DialogoGrupoVoluntario extends DialogFragment {
      * @param alerta
      * @param itemAtPosition
      */
-    private void crearNuevaAlerta(Alerta alerta, Usuario itemAtPosition){
+    private void crearNuevaAlerta(final Alerta alerta, Usuario itemAtPosition){
         alerta.setGrupo(itemAtPosition.getNombre());
-        CollectionReference coleccion = database.collection("alertas");
+        final CollectionReference coleccion = database.collection("alertas");
         coleccion.add(alerta)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        //Si ha sido correcto muestra un mensaje de exito
+                        //Si ha sido correcto, actualiza la alerta para que se guarde con su id, y muestra un mensaje de exito
+                        coleccion.document(documentReference.getId()).update("id", documentReference.getId());
 
                         Toast.makeText(getActivity(),R.string.new_alert_correct,Toast.LENGTH_LONG).show();
 

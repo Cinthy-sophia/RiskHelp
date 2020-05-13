@@ -33,6 +33,7 @@ public class DialogoTipoUsuario extends DialogFragment{
         builder.setView(layout);
         tvDialogo = layout.findViewById(R.id.tvDialogo);
 
+        //Segun el tipo de fragment que se desee iniciar el Dialogo mostrará un mensaje u otro.
         switch (fragment){
             case "LOG_IN":
                 tvDialogo.setText(R.string.dialog_log_in_message);
@@ -44,12 +45,14 @@ public class DialogoTipoUsuario extends DialogFragment{
                 break;
         }
 
+        //Listener en caso de que el usuario haga click en el botón de "Usuario Regular"
         listenerUsuarioRegular = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(),"El usuario no es voluntario",Toast.LENGTH_LONG).show();
 
-                //Si el usuario es un usuario regular segun si desea iniciar sesion o registrarse, los metodos cargan el fragment
+                //Si el usuario es un usuario regular segun si desea iniciar sesion o registrarse,
+                // los metodos cargan el fragment para cada caso
                 if(fragment.equalsIgnoreCase("LOG_IN")){
                     iniciarFragmentLogIn("USUARIO");
 
@@ -60,11 +63,13 @@ public class DialogoTipoUsuario extends DialogFragment{
             }
         };
 
+        //Listener en caso de que el usuario haga click en el botón de "Grupo Voluntario"
         listenerGrupoVoluntario = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(),"El usuario es voluntario",Toast.LENGTH_LONG).show();
-                //Si el usuario es un grupo voluntario segun si desea iniciar sesion o registrarse, los metodos cargan el fragment
+                //Si el usuario es un usuario regular segun si desea iniciar sesion o registrarse,
+                // los metodos cargan el fragment para cada caso
                 if(fragment.equalsIgnoreCase("LOG_IN")){
                     iniciarFragmentLogIn("GRUPO_VOLUNTARIO");
 
@@ -78,6 +83,11 @@ public class DialogoTipoUsuario extends DialogFragment{
 
         return builder.create();
     }
+
+    /**
+     * Inicia el fragment para registrarse en la aplicación, y le envia como argumento el tipo de usuario
+     * @param tipoUsuario
+     */
     public void iniciarFragmentSignUp(String tipoUsuario){
         Bundle b = new Bundle();
         Fragment fSignUp = new FragmentSignUp();
@@ -85,6 +95,11 @@ public class DialogoTipoUsuario extends DialogFragment{
         fSignUp.setArguments(b);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio,fSignUp).addToBackStack(null).commit();
     }
+
+    /**
+     * Inicia el fragment para iniciar sesion en la aplicación, y le envia como argumento el tipo de usuario
+     * @param tipoUsuario
+     */
     public void iniciarFragmentLogIn(String tipoUsuario){
         Bundle b = new Bundle();
         Fragment fLogIn = new FragmentLogIn();

@@ -17,12 +17,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class GrupoAdapter extends FirestoreRecyclerAdapter<Usuario, GrupoAdapter.GrupoViewHolder> implements View.OnClickListener{
     private View.OnClickListener listener;
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+
     public GrupoAdapter(@NonNull FirestoreRecyclerOptions<Usuario> options) {
         super(options);
 

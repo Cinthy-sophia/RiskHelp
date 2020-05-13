@@ -31,6 +31,7 @@ public class FragmentInicio extends Fragment {
         bEmergencia = view.findViewById(R.id.bEmergencia);
         bRegistro = view.findViewById(R.id.bRegistro);
         bIniciarSesion = view.findViewById(R.id.bIniciarSesion);
+
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             // El usuario que ya se ha autenticado, ingresa directamente a la ventana principal de la aplicacion
             Toast.makeText(getContext(),
@@ -40,11 +41,7 @@ public class FragmentInicio extends Fragment {
                     Toast.LENGTH_LONG)
                     .show();
 
-           /* Log.i("NOMBRE",FirebaseAuth.getInstance()
-                    .getCurrentUser()
-                    .getDisplayName());*/
-
-           iniciarActivityPrincipal(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getEmail());
+           iniciarActivityPrincipal();
 
         }
 
@@ -108,18 +105,14 @@ public class FragmentInicio extends Fragment {
      */
     public void iniciarFragmentNuevaAlerta(){
         FragmentNuevaAlerta fragmentNuevaAlerta = new FragmentNuevaAlerta();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio, fragmentNuevaAlerta).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_inicio, fragmentNuevaAlerta).addToBackStack(null).commit();
     }
 
     /**
-     * Recibe el nombre y el email del usuario para enviarlos al PrincipalActivity, y mostrarlos
-     * @param nombreU
-     * @param emailU
+     * Inicia el activity principal.
      */
-    public void iniciarActivityPrincipal(String nombreU, String emailU){
+    public void iniciarActivityPrincipal(){
         Intent i = new Intent(getContext(), PrincipalActivity.class);
-        i.putExtra("nombreUsuario",nombreU);
-        i.putExtra("emailUsuario",emailU);
         startActivity(i);
         //Para eliminar la activity anterior al iniciar la nueva
         getActivity().finish();

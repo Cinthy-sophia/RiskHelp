@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,7 @@ public class FragmentMiPerfil extends Fragment {
     private TextView tvTelefono;
     private TextView tvEmail;
     private FirebaseFirestore database;
-    private String email;//Con el email busco el usuario o grupo voluntario y muestro los datos necesarios
+    private String email;
     private Usuario usuario;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mi_perfil, container, false);
@@ -49,7 +50,9 @@ public class FragmentMiPerfil extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //Con el correo obtengo el usuario o grupo y lo guardo en el objeto, según el tipo de usuario recibido mostrara los datos
+        Toast.makeText(getContext(),"Cargando...",Toast.LENGTH_SHORT).show();
+
+        //Con el email selecciono el usuario correcto, y luego cargo los TextView con los datos
         CollectionReference coleccion = database.collection("usuarios");
         coleccion.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -69,23 +72,6 @@ public class FragmentMiPerfil extends Fragment {
         });
 
 
-    }
-    public Usuario buscarUsuarioPorEmail(String email){
-        final Usuario[] u = new Usuario[1];
-        CollectionReference coleccion = database.collection("usuarios");
-        Query query = coleccion.whereEqualTo("email",email);
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        u[0] = document.toObject(Usuario.class);
-                    }
-                }
-            }
-        });
-        return u[0];
     }
 
 }

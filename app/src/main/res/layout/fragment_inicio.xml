@@ -15,8 +15,25 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintVertical_bias="0.084"
         app:srcCompat="@drawable/risk_help" />
+
+    <TextView
+        android:id="@+id/tvEmailUsuario"
+        android:layout_width="316dp"
+        android:layout_height="58dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="@string/app_slogan"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivIcono"
+        app:layout_constraintVertical_bias="0.079" />
 
     <Button
         android:id="@+id/bEmergencia"
@@ -31,7 +48,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.663" />
@@ -47,14 +64,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bEmergencia"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.829" />
 
     <Button
         android:id="@+id/bRegistro"
-        android:layout_width="202dp"
+        android:layout_width="199dp"
         android:layout_height="71dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/sign_up"
@@ -63,26 +79,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
-
-    <TextView
-        android:id="@+id/tvEmailUsuario"
-        android:layout_width="316dp"
-        android:layout_height="58dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/app_slogan"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIcono"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintVertical_bias="0.945" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

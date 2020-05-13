@@ -3,7 +3,6 @@ package com.cinthyasophia.riskhelp.modelos;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private String id;
     private String nombre;
     private String email;
     private String telefono;
@@ -25,10 +24,6 @@ public class Usuario implements Serializable {
 
     public boolean isVoluntario() {
         return voluntario;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getNombre() {

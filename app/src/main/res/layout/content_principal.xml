@@ -2,11 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_principal"
+    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_principal"
-    android:id="@+id/fragment_principal"
-    android:name="androidx.navigation.fragment.NavHostFragment">
+    tools:showIn="@layout/app_bar_principal" >
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="299dp"
+        android:layout_height="284dp"
+        android:layout_margin="55dp"
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@drawable/risk_help" />
 </FrameLayout>

@@ -50,14 +50,21 @@ public class FragmentLogIn extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //Según el tipo de usuario que recibe como argumento se mostrará un mensaje u otro
         if (tipoUsuario.equalsIgnoreCase("USUARIO")){
             tvMessageLogIn.setText(R.string.log_in_message_user);
         }else if(tipoUsuario.equalsIgnoreCase("GRUPO_VOLUNTARIO")){
             tvMessageLogIn.setText(R.string.log_in_message_volunteer);
         }
+
         bEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Compruebo que los campos no están vacíos, o que contengan ciertos carácteres
+                //y en caso de que así sea mostrará un mensaje de error.
+
                 if(tfEmail.getText().toString().isEmpty()){
                     Toast.makeText(getContext(),R.string.email_empty,Toast.LENGTH_LONG).show();
                 }else if(!tfEmail.getText().toString().contains("@")){
@@ -66,6 +73,7 @@ public class FragmentLogIn extends Fragment {
                     Toast.makeText(getContext(),R.string.password_error,Toast.LENGTH_LONG).show();
 
                 }else{
+                    //En caso de que esté correcto, se inicia sesión con los datos proporcionados
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(tfEmail.getText().toString(),tfPassword.getText().toString())
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
@@ -82,9 +90,7 @@ public class FragmentLogIn extends Fragment {
                                     snack.setAction("OK", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            // Respond to the click, such as by undoing the modification that caused
-                                            // this message to be displayed
-                                            //Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
+
                                         }
                                     });
                                     snack.show();
@@ -96,6 +102,10 @@ public class FragmentLogIn extends Fragment {
         });
 
     }
+
+    /**
+     * Inicia el ActivityPrincipal
+     */
     public void iniciarActivityPrincipal(){
         Intent i = new Intent(getContext(), PrincipalActivity.class);
         startActivity(i);

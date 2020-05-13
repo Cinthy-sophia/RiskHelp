@@ -37,7 +37,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FragmentSignUp extends Fragment {
     private final int PASSWORD_MIN_SIZE = 6;
     private TextView tvMessage;
-    private TextView tvApellidoODireccion;
     private TextInputEditText tfNombre;
     private TextInputEditText tfTelefono;
     private TextInputEditText tfCodigoPostal;
@@ -58,7 +57,6 @@ public class FragmentSignUp extends Fragment {
         //Text Views
         //Dependiendo del tipo de usuario(Usuario regular/grupo voluntario), tendrán un contenido u otro
         tvMessage = view.findViewById(R.id.tvMessage);
-        tvApellidoODireccion = view.findViewById(R.id.tvApellidoODireccion);
 
         //Text Fields
         tfNombre = view.findViewById(R.id.tfNombre);
@@ -80,11 +78,9 @@ public class FragmentSignUp extends Fragment {
         switch (tipoUsuario){
             case "USUARIO":
                 tvMessage.setText(R.string.sign_up_user);
-                tvApellidoODireccion.setText(R.string.last_name);
                 break;
             case "GRUPO_VOLUNTARIO":
                 tvMessage.setText(R.string.sign_up_volunteer);
-                tvApellidoODireccion.setText(R.string.address);
                 break;
             default:
 
@@ -113,6 +109,7 @@ public class FragmentSignUp extends Fragment {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    //Si algo ha fallado
                                     Log.e("ERROR",e.getMessage());
                                     Snackbar snack = Snackbar.make(getView(), R.string.sign_up_failure, Snackbar.LENGTH_INDEFINITE);
                                     snack.setAction("OK", new View.OnClickListener() {
@@ -129,13 +126,14 @@ public class FragmentSignUp extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
+                                    //Si ha ido bien, según el tipo de usuario que haya recibido, marcará
+                                    // el nuevo usuario como voluntario o no
                                     switch (tipoUsuario){
                                         case "USUARIO":
                                             voluntario = false;
                                             break;
                                         case "GRUPO_VOLUNTARIO":
                                             voluntario = true;
-
                                             break;
                                         default:
 
@@ -143,12 +141,13 @@ public class FragmentSignUp extends Fragment {
                                     }
                                     Usuario nuevoUsuario = new Usuario(tfNombre.getText().toString(),tfEmail.getText().toString(),tfTelefono.getText().toString(),Integer.parseInt(tfCodigoPostal.getText().toString()),voluntario);
 
+                                    //Actualizo el usuario registrado en la aplicación para que tenga el mismo nombre
+                                    // que el usuario registrado en la base de datos
                                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                             .setDisplayName(nuevoUsuario.getNombre())
                                             //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
                                             .build();
-
 
                                     user.updateProfile(profileUpdates)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -178,6 +177,11 @@ public class FragmentSignUp extends Fragment {
         });
 
     }
+
+    /**
+     * Guarda el nuevo usuario recibido en la base de datos.
+     * @param usuario
+     */
     private void crearNuevoUsuario(Usuario usuario){
 
         CollectionReference coleccion = database.collection("usuarios");
@@ -200,9 +204,12 @@ public class FragmentSignUp extends Fragment {
                     }
                 });
     }
+
+    /**
+     * Inicia la ActivityPrincipal.
+     */
     public void iniciarActivityPrincipal(){
         Intent i = new Intent(getContext(),PrincipalActivity.class);
-        i.putExtra("tipoUsuario",tipoUsuario);
         startActivity(i);
         getActivity().finish();
     }
