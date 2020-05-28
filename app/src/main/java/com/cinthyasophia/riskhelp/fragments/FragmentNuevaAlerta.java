@@ -19,6 +19,7 @@ import com.cinthyasophia.riskhelp.Util.Lib;
 import com.cinthyasophia.riskhelp.dialogos.DialogoGrupoVoluntario;
 import com.cinthyasophia.riskhelp.modelos.Alerta;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.GregorianCalendar;
@@ -46,7 +47,9 @@ public class FragmentNuevaAlerta extends Fragment {
         cBAnonimo = view.findViewById(R.id.cBAnonimo);
         bContinuar = view.findViewById(R.id.bContinuar);
         lib= new Lib();
-
+        View activity = inflater.inflate(R.layout.activity_principal,container,false);
+        FloatingActionButton fab = activity.findViewById(R.id.fab);
+        fab.hide();
 
         return view;
     }

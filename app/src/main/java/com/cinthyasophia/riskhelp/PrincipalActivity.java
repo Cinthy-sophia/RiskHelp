@@ -91,6 +91,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             notificationManager = getSystemService(NotificationManager.class);
 
             try {
+                //Paramos el hilo principal por cierta cantidad de tiempo para que la aplicacion
+                //tenga tiempo de recibir y cargar los datos correctamente
                 Toast.makeText(this,"Cargando...",Toast.LENGTH_SHORT).show();
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -98,6 +100,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             }finally {
                 tvNombreUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                 tvEmailUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
             }
 
             database = FirebaseFirestore.getInstance();

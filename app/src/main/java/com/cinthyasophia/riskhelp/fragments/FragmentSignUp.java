@@ -1,6 +1,7 @@
 package com.cinthyasophia.riskhelp.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -146,7 +147,7 @@ public class FragmentSignUp extends Fragment {
                                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                             .setDisplayName(nuevoUsuario.getNombre())
-                                            //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                            .setPhotoUri(Uri.parse("drawable/fireman_profile.png"))
                                             .build();
 
                                     user.updateProfile(profileUpdates)

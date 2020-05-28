@@ -45,4 +45,7 @@
     <string name="select_volunteer_group">Selecciona un grupo voluntario</string>
     <string name="new_alert_correct">La alerta ha sido creada con éxito.</string>
     <string name="new_alert_error">La alerta no ha sido creada.</string>
+    <string name="settings_message">Aqui puedes cambiar tu contraseña y tu foto de perfil</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="change_profile_image">Cambiar foto de perfil</string>
 </resources>

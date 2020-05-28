@@ -54,6 +54,9 @@
     <string name="new_alert_correct">The alert has been successfully created.</string>
     <string name="new_alert_error">The alert has not been created.</string>
     <string name="menu_alerts">Alerts</string>
+    <string name="settings_message">Here you can change your password or profile image</string>
+    <string name="change_password">Change password</string>
+    <string name="change_profile_image">Change profile image</string>
 
 
 </resources>
