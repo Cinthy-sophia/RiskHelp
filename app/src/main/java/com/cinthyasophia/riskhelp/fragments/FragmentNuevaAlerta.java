@@ -47,9 +47,7 @@ public class FragmentNuevaAlerta extends Fragment {
         cBAnonimo = view.findViewById(R.id.cBAnonimo);
         bContinuar = view.findViewById(R.id.bContinuar);
         lib= new Lib();
-        View activity = inflater.inflate(R.layout.activity_principal,container,false);
-        FloatingActionButton fab = activity.findViewById(R.id.fab);
-        fab.hide();
+
 
         return view;
     }
@@ -95,9 +93,10 @@ public class FragmentNuevaAlerta extends Fragment {
                 tfDireccion.setText("");
                 tfCodigoPostal.setText("");
                 tfTelefono.setText("");
-
+                getActivity().getSupportFragmentManager().beginTransaction().remove(FragmentNuevaAlerta.this).commit();
             }
         });
 
     }
+
 }

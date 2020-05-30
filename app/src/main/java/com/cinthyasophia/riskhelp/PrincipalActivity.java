@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cinthyasophia.riskhelp.fragments.FragmentAjustes;
 import com.cinthyasophia.riskhelp.fragments.FragmentAlertas;
 import com.cinthyasophia.riskhelp.fragments.FragmentMiPerfil;
 import com.cinthyasophia.riskhelp.fragments.FragmentNuevaAlerta;
@@ -26,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -86,8 +89,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             View header = navigationView.getHeaderView(0);
             tvNombreUsuario = header.findViewById(R.id.tvNombreUsuario);
             tvEmailUsuario = header.findViewById(R.id.tvEmailUsuario);
-            ivFotoUsuario = header.findViewById(R.id.ivFotoUsuario);//todo cambio de la imagen en ajustes
+            ivFotoUsuario = header.findViewById(R.id.ivFotoUsuario);
             fab = findViewById(R.id.fab);
+            fab.hide();
             notificationManager = getSystemService(NotificationManager.class);
 
             try {
@@ -100,6 +104,26 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             }finally {
                 tvNombreUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                 tvEmailUsuario.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+                if (FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()==null){
+                    //Si el usuario registrado no tiene una foto indicada, se le designa una predeterminada
+                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setPhotoUri(Uri.parse("drawable/fireman_profile.png"))
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("INFO", "User profile updated.");
+                                        Log.d("INFO", user.getDisplayName());
+                                    }
+                                }
+                            });
+                }
+                ivFotoUsuario.setImageURI(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
 
             }
 
@@ -174,9 +198,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                         if (user.getEmail().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                             if (user.isVoluntario()){
                                 tipoUsuario = "GRUPO_VOLUNTARIO";
-                                fab.hide();
                             }else{
                                 tipoUsuario = "USUARIO";
+                                fab.show();
                             }
 
                         }
@@ -196,6 +220,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
      */
     public void iniciarFragmentNuevaAlerta(){
         FragmentNuevaAlerta fragmentNuevaAlerta = new FragmentNuevaAlerta();
+        fab.hide();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentNuevaAlerta).addToBackStack(null).commit();
     }
 
@@ -204,6 +229,19 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.principal, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.miAjustes:
+                FragmentAjustes fragmentAjustes = new FragmentAjustes();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentAjustes).addToBackStack(null).commit();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -253,12 +291,21 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+
+
     @Override
     public void onBackPressed() {
+
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
+        }else if (getFragmentManager().getBackStackEntryCount() > 0){
+            getFragmentManager().popBackStackImmediate();
         }else{
-            finish();
+            super.onBackPressed();
+            if(tipoUsuario!=null && tipoUsuario.equalsIgnoreCase("USUARIO")){
+                fab.show();
+            }
+
         }
     }
 
@@ -350,7 +397,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     }
 
     /**
-     * Recibe la alerta nueva recibida y segun los usuarios registrados en la base de datos
+     * Recibe la alerta nueva y segun los usuarios registrados en la base de datos
      * comprobará si es voluntario y es el grupo mencionado en la alerta en cuestion e indicará si es correcto o no.
      * @param nuevaAlerta
      * @return

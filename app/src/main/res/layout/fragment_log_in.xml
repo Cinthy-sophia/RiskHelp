@@ -24,20 +24,20 @@
         app:layout_constraintVertical_bias="0.44" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="222dp"
-        android:layout_height="71dp"
+        android:layout_width="325dp"
+        android:layout_height="73dp"
         app:boxBackgroundColor="#43FFFFFF"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tfEmail"
-            android:layout_width="199dp"
+            android:layout_width="312dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
             android:padding="0dp"
@@ -62,22 +62,22 @@
         app:layout_constraintVertical_bias="0.577" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="199dp"
-        android:layout_height="66dp"
+        android:layout_width="325dp"
+        android:layout_height="73dp"
         app:boxBackgroundColor="#43FFFFFF"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657"
+        app:layout_constraintVertical_bias="0.656"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tfPassword"
-            android:layout_width="199dp"
+            android:layout_width="303dp"
             android:layout_height="58dp"
             android:fontFamily="sans-serif-smallcaps"
             android:padding="0dp"

@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <ImageView
-        android:id="@+id/ivFotoPerfil"
+        android:id="@+id/ivFotoActual"
         android:layout_width="101dp"
         android:layout_height="105dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,13 +56,12 @@
         android:id="@+id/bCambiarContra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="376dp"
         android:text="@string/change_password"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.553" />
 
     <Button
         android:id="@+id/bCambiarFoto"

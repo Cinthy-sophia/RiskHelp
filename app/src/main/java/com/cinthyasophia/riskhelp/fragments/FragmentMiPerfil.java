@@ -37,7 +37,7 @@ public class FragmentMiPerfil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mi_perfil, container, false);
         database = FirebaseFirestore.getInstance();
         email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);//todo colocar la imagen segun la uri indicada
+        ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);
         tvNombre = view.findViewById(R.id.tvNombre);
         tvCodigoPostal = view.findViewById(R.id.tvCodigoPostal);
         tvTelefono = view.findViewById(R.id.tvTelefono);
@@ -65,6 +65,7 @@ public class FragmentMiPerfil extends Fragment {
                             tvEmail.setText(usuario.getEmail());
                             tvTelefono.setText(String.valueOf(usuario.getTelefono()));
                             tvCodigoPostal.setText(String.valueOf(usuario.getCodigoPostal()));
+                            ivFotoPerfil.setImageURI(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
                         }
                     }
                 }
