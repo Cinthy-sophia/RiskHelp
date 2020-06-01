@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,8 +39,10 @@ public class FragmentAlertas extends Fragment {
     private String tipoUsuario;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alertas, container, false);
+
         database = FirebaseFirestore.getInstance();
         rvAlertas = view.findViewById(R.id.rvAlertas);
         return view;
@@ -89,7 +92,7 @@ public class FragmentAlertas extends Fragment {
                 .setQuery(query,Alerta.class)
                 .build();
 
-        adapter = new AlertaAdapter(options,tipoUsuario,listener,getContext());
+        adapter = new AlertaAdapter(options,tipoUsuario,listener);
         rvAlertas.setAdapter(adapter);
         rvAlertas.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
 

@@ -86,11 +86,13 @@ public class FragmentLogIn extends Fragment {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    tfEmail.setText("");
+                                    tfPassword.setText("");
                                     Snackbar snack = Snackbar.make(getView(), R.string.log_in_failure, Snackbar.LENGTH_INDEFINITE);
                                     snack.setAction("OK", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
+                                            //vacio
                                         }
                                     });
                                     snack.show();

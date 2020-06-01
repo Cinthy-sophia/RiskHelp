@@ -3,7 +3,7 @@ package com.cinthyasophia.riskhelp.modelos;
 import com.cinthyasophia.riskhelp.Util.Lib;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class Alerta implements Serializable {
     private String id;
@@ -15,11 +15,11 @@ public class Alerta implements Serializable {
     private String telefono;
     private String grupo;
     private int codigo_postal;
-    private GregorianCalendar fechaHora;
+    private long fechaHora;
     private Lib lib = new Lib();
 
 
-    public Alerta(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String grupo, int codigo_postal, String fechaHora) {
+    public Alerta(String descripcion, String direccion, boolean anonimo, String denunciante, String telefono, String grupo, int codigo_postal, Date fechaHora) {
         this.descripcion = descripcion;
         this.direccion = direccion;
         this.anonimo = anonimo;
@@ -31,18 +31,18 @@ public class Alerta implements Serializable {
         this.telefono = telefono;
         this.grupo = grupo;
         this.codigo_postal = codigo_postal;
-        this.fechaHora =lib.getFecha(fechaHora);
+        this.fechaHora =fechaHora.getTime();
     }
 
     public Alerta() {
     }
 
-    public void setFechaHora(String fechaHora) {
-        this.fechaHora = lib.getFecha(fechaHora);
+    public void setFechaHora(long fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
-    public String getFechaHora() {
-        return lib.getFecha(fechaHora);
+    public long getFechaHora() {
+        return fechaHora;
     }
 
     public void setTomada(boolean tomada) {

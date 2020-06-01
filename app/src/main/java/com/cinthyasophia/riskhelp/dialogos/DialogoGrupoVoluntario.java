@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
 import com.cinthyasophia.riskhelp.adapters.GrupoAdapter;
 import com.cinthyasophia.riskhelp.modelos.Alerta;
@@ -45,7 +46,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
     private FirestoreRecyclerOptions<Usuario> options;
     private CollectionReference coleccion;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -60,16 +61,10 @@ public class DialogoGrupoVoluntario extends DialogFragment {
         rvGrupos = layout.findViewById(R.id.rvGrupos);
         coleccion = database.collection("usuarios");
 
-
         obtenerGrupos();
 
-        if (gruposVoluntarios.size()!=0){
-            Toast.makeText(getActivity(),"Lo sentimos pero no hay grupos disponibles en tu zona, te pedimos que llames a los numeros de emergencia: 112,012",Toast.LENGTH_LONG).show();
-            dismiss();
-            //todo traducir en string
-        }
         //Se obtiene en el query los usuarios marcados como voluntarios y que tengan el mismo codigo postal que el de la nueva alerta
-        Query query = coleccion.whereEqualTo("codigo_postal",nuevaAlerta.getCodigo_postal()).whereEqualTo("voluntario",true);
+        Query query = coleccion.whereEqualTo("codigoPostal", nuevaAlerta.getCodigo_postal()).whereEqualTo("voluntario",true);
 
 
         options = new FirestoreRecyclerOptions.Builder<Usuario>()
@@ -108,11 +103,19 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                 Usuario grupo;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("LOS DATOS", document.getId() + " => " + document.getData());
                         grupo = document.toObject(Usuario.class);
                         if (grupo.isVoluntario()){
                             gruposVoluntarios.add(grupo);
+                            Log.d("LOS DATOS", document.getId() + " => " + document.getData());
                         }
+                    }
+                    if (gruposVoluntarios.size()==0){
+                        Toast.makeText(getActivity(),R.string.group_error,Toast.LENGTH_LONG).show();
+                        dismiss();
+
+                    }else{
+                        Toast.makeText(getActivity(),"TODO CORRECTO MISTER",Toast.LENGTH_LONG).show();
+
                     }
                 } else {
                     Log.d("LOS DATOS", "Error getting documents: ", task.getException());
@@ -137,7 +140,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                         //Si ha sido correcto, actualiza la alerta para que se guarde con su id, y muestra un mensaje de exito
                         coleccion.document(documentReference.getId()).update("id", documentReference.getId());
 
-                        Toast.makeText(getActivity(),R.string.new_alert_correct,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity(),R.string.new_alert_correct,Toast.LENGTH_LONG).show();
 
 
                     }
@@ -146,7 +149,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Si algo ha fallado
-                        Toast.makeText(getActivity(),R.string.new_alert_error,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity(),R.string.new_alert_error,Toast.LENGTH_LONG).show();
                     }
                 });
     }

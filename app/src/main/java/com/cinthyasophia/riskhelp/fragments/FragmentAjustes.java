@@ -63,32 +63,45 @@ public class FragmentAjustes extends Fragment {
                 openGallery();
             }
         });
+
         bCambiarContra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Dialogo para cambiar la contraseña
                 DialogoCambioPassword dialogoCambioPassword = new DialogoCambioPassword();
-                dialogoCambioPassword.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+                dialogoCambioPassword.show(getActivity().getSupportFragmentManager(), "error_dialog_cambio_password");
 
             }
         });
 
     }
+
+    /**
+     * Lanza un intent para abrir la galería, y que el usuario seleccione una foto
+     */
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         gallery.setType("image/");
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+    /**
+     * Según el resultCode recibido, guarda la imagen recibida por medio del intent,
+     * y guarda la ruta de la imagen en el perfil del usuario actual.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         Uri imageUri;
-        getActivity();
         if(resultCode == Activity.RESULT_OK ){
             imageUri = data.getData();
             ivFotoActual.setImageURI(imageUri);
-            Bitmap imagen = ((BitmapDrawable)ivFotoActual.getDrawable()).getBitmap();
+            Bitmap imagen = ((BitmapDrawable) ivFotoActual.getDrawable()).getBitmap();
 
+            //Recibe la ruta una vez guardada la imagen
             String ruta = guardarImagen(getContext(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), imagen);
 
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -111,21 +124,34 @@ public class FragmentAjustes extends Fragment {
         }
     }
 
-
+    /**
+     * Recibe los datos necesarios para guardar la imagen en la memoria interna del dispositivo,
+     * y regresa la ruta en la que ha sido creada
+     * @param context
+     * @param nombre
+     * @param imagen
+     * @return
+     */
     private String guardarImagen (Context context, String nombre, Bitmap imagen){
+        //Creamos un contextwrapper con la memoria interna de la aplicación
         ContextWrapper cw = new ContextWrapper(context);
+        //Obtenemos el directorio a partir del contextwrapper, y creamos una carpeta llamada FotosPerfil privada
         File dirImages = cw.getDir("FotosPerfil", Context.MODE_PRIVATE);
+        //Creamos la ruta de nuestra imagen, usando la del directorio anterior, y el nombre de nuestra imagen y su extensión .png
         File myPath = new File(dirImages, nombre + ".png");
         FileOutputStream fos = null;
         try{
             fos = new FileOutputStream(myPath);
+            //Elegimos un formato de compresión, un int que indique la calidad de la imagen, y el objeto FileOutputStream creado
             imagen.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            //Limpiamos el buffer
             fos.flush();
         }catch (FileNotFoundException ex){
             ex.printStackTrace();
         }catch (IOException ex){
             ex.printStackTrace();
         }
+        //Devolvemos la ruta de nuestra imagen ya guardada
         return myPath.getAbsolutePath();
     }
 

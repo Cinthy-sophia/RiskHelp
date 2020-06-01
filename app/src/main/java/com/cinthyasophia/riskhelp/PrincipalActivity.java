@@ -61,6 +61,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     private static final String CHANNEL_ID = "idcanal";
     private NotificationCompat.Builder mBuilder;
     private NotificationManager notificationManager;
+    private Toolbar toolbar;
     private static final int ID_ALERTA_NOTIFICACION =0;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -75,7 +76,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             finish();
         }else{
 
-            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar = findViewById(R.id.toolbar);
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
 
@@ -166,8 +167,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 @Override
                 public void onClick(View view) {
                     iniciarFragmentNuevaAlerta();
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
                 }
             });
 
@@ -254,23 +253,23 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             b.putString("ALERTAS", "Mi texto");
             fragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
-            setTitle(R.string.menu_alerts);
+            toolbar.setTitle(R.string.menu_alerts);
         } else if (id == R.id.nav_alertas_tomadas) {
             b.putString("ALERTAS_TOMADAS", "Mi texto");
-            setTitle(R.string.menu_taken_alerts);
+            toolbar.setTitle(R.string.menu_taken_alerts);
             fragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
         } else if (id == R.id.nav_alertas_no_tomadas) {
             b.putString("ALERTAS_NO_TOMADAS", "Mi texto");
             fragment.setArguments(b);
-            setTitle(R.string.menu_untaken_alerts);
+            toolbar.setTitle(R.string.menu_untaken_alerts);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragment).commit();
 
         }else if (id == R.id.nav_mi_perfil) {
             b.putString("MI PERFIL", "Mi texto");
-            setTitle(R.string.menu_my_profile);
             FragmentMiPerfil fragmentMiPerfil = new FragmentMiPerfil();
             fragmentMiPerfil.setArguments(b);
+            toolbar.setTitle("");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_principal, fragmentMiPerfil).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_log_out){
@@ -283,6 +282,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 }
             });
 
+        }else{
+            toolbar.setTitle("");
         }
         fragment.setListener(this);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

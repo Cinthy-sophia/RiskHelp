@@ -15,11 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.cinthyasophia.riskhelp.MainActivity;
 import com.cinthyasophia.riskhelp.PrincipalActivity;
 import com.cinthyasophia.riskhelp.R;
-import com.cinthyasophia.riskhelp.modelos.Alerta;
-import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
 import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -116,9 +113,7 @@ public class FragmentSignUp extends Fragment {
                                     snack.setAction("OK", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            // Respond to the click, such as by undoing the modification that caused
-                                            // this message to be displayed
-                                            //Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
+                                            //vacio
                                         }
                                     });
                                     snack.show();

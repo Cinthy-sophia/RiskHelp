@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cinthyasophia.riskhelp.R;
-import com.cinthyasophia.riskhelp.dialogos.DialogoGrupoVoluntario;
-import com.cinthyasophia.riskhelp.modelos.GrupoVoluntario;
 import com.cinthyasophia.riskhelp.modelos.Usuario;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

@@ -22,6 +22,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class FragmentNuevaAlerta extends Fragment {
@@ -81,7 +82,7 @@ public class FragmentNuevaAlerta extends Fragment {
                 }else{
                     //En caso contrario se creará la nueva alerta y se iniciará el DialogoGrupoVoluntario para que el usuario pueda
                     //seleccionar el grupo y se guarde la nueva alerta en la base de datos.
-                    Alerta alerta = new Alerta(tfDescripcion.getText().toString(),tfDireccion.getText().toString(),anonimo,tfNombre.getText().toString(),tfTelefono.getText().toString(),null,Integer.parseInt(tfCodigoPostal.getText().toString()),lib.getFecha(new GregorianCalendar()));
+                    Alerta alerta = new Alerta(tfDescripcion.getText().toString(),tfDireccion.getText().toString(),anonimo,tfNombre.getText().toString(),tfTelefono.getText().toString(),null,Integer.parseInt(tfCodigoPostal.getText().toString()),new Date());
                     DialogoGrupoVoluntario dialogoGrupoVoluntario = new DialogoGrupoVoluntario();
                     Bundle fragment = new Bundle();
                     fragment.putSerializable("nuevaAlerta",alerta);

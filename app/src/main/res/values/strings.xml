@@ -57,6 +57,8 @@
     <string name="settings_message">Here you can change your password or profile image</string>
     <string name="change_password">Change password</string>
     <string name="change_profile_image">Change profile image</string>
+    <string name="group_error">"We're sorry but there are no groups available in your area, we ask you to call the emergency numbers: 112 or 012 "</string>
+    <string name="enter_new_password">Enter a new password</string>
 
 
 </resources>

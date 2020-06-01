@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DialogoCambioPassword extends DialogFragment {
+    private static final int PASSWORD_MIN_SIZE = 6;
     TextInputEditText tfPassword;
     Button bCambiar;
     @NonNull
@@ -37,20 +39,26 @@ public class DialogoCambioPassword extends DialogFragment {
         bCambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                user.updatePassword(tfPassword.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("INFO", "User password updated.");
-                                    dismiss();
-                                }else{
-                                    Log.d("INFO", "Error.");
+                if (tfPassword.getText().toString().isEmpty() || tfPassword.getText().length() < PASSWORD_MIN_SIZE ){
+                    Toast.makeText(getContext(),R.string.password_error,Toast.LENGTH_LONG).show();
+
+                }else{
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    user.updatePassword(tfPassword.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("INFO", "User password updated.");
+                                        dismiss();
+                                    }else{
+                                        Log.d("INFO", "Error.");
+                                    }
                                 }
-                            }
-                        });
-            }
+                            });
+                    }
+                }
+
         });
 
         return builder.create();

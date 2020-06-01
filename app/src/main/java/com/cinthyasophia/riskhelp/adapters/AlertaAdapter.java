@@ -3,6 +3,7 @@ package com.cinthyasophia.riskhelp.adapters;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,17 @@ import com.cinthyasophia.riskhelp.modelos.Alerta;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import java.util.Date;
+
 public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter.AlertaViewHolder> {
     private String tipoUsuario;
     private IAlertaListener listener;
-    private Context context;
 
-    public AlertaAdapter(FirestoreRecyclerOptions<Alerta> options, String tipoUsuario, IAlertaListener listener, Context context) {
+
+    public AlertaAdapter(FirestoreRecyclerOptions<Alerta> options, String tipoUsuario, IAlertaListener listener) {
         super(options);
         this.tipoUsuario = tipoUsuario;
         this.listener = listener;
-        this.context = context;
     }
 
     @NonNull
@@ -47,7 +49,7 @@ public class AlertaAdapter extends FirestoreRecyclerAdapter<Alerta,AlertaAdapter
         alertaViewHolder.tvDireccion.setText(alerta.getDireccion());
         alertaViewHolder.tvTelefono.setText(alerta.getTelefono());
         alertaViewHolder.tvGrupoV.setText(alerta.getGrupo());
-        alertaViewHolder.tvFechaHora.setText(alerta.getFechaHora());
+        alertaViewHolder.tvFechaHora.setText(DateFormat.format("dd/MM/yyyy HH:mm", new Date(alerta.getFechaHora())));
         if (alerta.isTomada()){
             alertaViewHolder.tvNombre.setTypeface(Typeface.DEFAULT);
             alertaViewHolder.tvDescripcion.setTypeface(Typeface.DEFAULT);
