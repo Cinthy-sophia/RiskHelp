@@ -34,7 +34,6 @@ public class FragmentNuevaAlerta extends Fragment {
     private MaterialCheckBox cBAnonimo;
     private Button bContinuar;
     private boolean anonimo;
-    private Lib lib;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class FragmentNuevaAlerta extends Fragment {
         tfTelefono = view.findViewById(R.id.tfTelefono);
         cBAnonimo = view.findViewById(R.id.cBAnonimo);
         bContinuar = view.findViewById(R.id.bContinuar);
-        lib= new Lib();
 
 
         return view;
@@ -87,7 +85,8 @@ public class FragmentNuevaAlerta extends Fragment {
                     Bundle fragment = new Bundle();
                     fragment.putSerializable("nuevaAlerta",alerta);
                     dialogoGrupoVoluntario.setArguments(fragment);
-                    dialogoGrupoVoluntario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+                    dialogoGrupoVoluntario.show(getActivity().getSupportFragmentManager(), "error_dialog");
+
                 }
                 tfNombre.setText("");
                 tfDescripcion.setText("");

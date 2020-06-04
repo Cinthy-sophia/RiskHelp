@@ -86,7 +86,7 @@ public class FragmentAlertas extends Fragment {
         }
 
         //Ordenamos las alertas en funcion de la hora en la que se reciben.
-        query.orderBy("fechaHora", Query.Direction.ASCENDING);
+        query= query.orderBy("fechaHora", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<Alerta> options = new FirestoreRecyclerOptions.Builder<Alerta>()
                 .setQuery(query,Alerta.class)
@@ -98,19 +98,6 @@ public class FragmentAlertas extends Fragment {
 
         adapter.startListening();
 
-        //En caso de que no hayan alertas
-        /*if (options.getSnapshots().size()==0){
-            Snackbar snack = Snackbar.make(getView(), "No hay alertas aún, te avisaremos cuando tengas alguna.", Snackbar.LENGTH_INDEFINITE);
-            snack.setAction("OK", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Respond to the click, such as by undoing the modification that caused
-                    // this message to be displayed
-                    //Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
-                }
-            });
-            snack.show();
-        }*/
         Log.d("ALERTAG", String.valueOf(options.getSnapshots().size()));
         Log.d("ALERTAG", "Start listeninng");
     }

@@ -59,6 +59,7 @@
     <string name="change_profile_image">Change profile image</string>
     <string name="group_error">"We're sorry but there are no groups available in your area, we ask you to call the emergency numbers: 112 or 012 "</string>
     <string name="enter_new_password">Enter a new password</string>
+    <string name="back_button">To exit press the back button</string>
 
 
 </resources>

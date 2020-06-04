@@ -50,4 +50,5 @@
     <string name="change_profile_image">Cambiar foto de perfil</string>
     <string name="group_error">Lo sentimos pero no hay grupos disponibles en tu zona, te pedimos que llames a los números de emergencia: 112 o 012</string>
     <string name="enter_new_password">Indica una nueva contraseña</string>
+    <string name="back_button">Para salir presiona el botón de volver</string>
 </resources>

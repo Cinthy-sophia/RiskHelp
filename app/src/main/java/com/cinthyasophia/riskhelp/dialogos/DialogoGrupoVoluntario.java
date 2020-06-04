@@ -114,7 +114,7 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                         dismiss();
 
                     }else{
-                        Toast.makeText(getActivity(),"TODO CORRECTO MISTER",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Para salir presiona el boton de volver.",Toast.LENGTH_LONG).show();
 
                     }
                 } else {

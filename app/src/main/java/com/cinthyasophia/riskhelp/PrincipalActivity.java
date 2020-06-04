@@ -413,7 +413,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         u = document.toObject(Usuario.class);
 
-                        if (u.isVoluntario()&& u.getNombre().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
+                        if (FirebaseAuth.getInstance() != null && u.isVoluntario()&& u.getNombre().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
                                 && u.getEmail().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                                 && u.getNombre().equalsIgnoreCase(nuevaAlerta.getGrupo())){
                             correct[0] = true;
