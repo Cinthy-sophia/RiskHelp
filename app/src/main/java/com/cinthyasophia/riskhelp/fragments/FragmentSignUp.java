@@ -187,7 +187,7 @@ public class FragmentSignUp extends Fragment {
                     public void onSuccess(DocumentReference documentReference) {
                         //Si ha sido correcto muestra un mensaje de exito
 
-                        Toast.makeText(getContext(),"Nuevo usuario creado correctamente.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),R.string.sign_up_correct,Toast.LENGTH_LONG).show();
 
 
                     }
@@ -196,7 +196,7 @@ public class FragmentSignUp extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Si algo ha fallado
-                        Toast.makeText(getActivity(),"El usuario no ha podido ser creado.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),R.string.sign_up_incorrect,Toast.LENGTH_LONG).show();
                     }
                 });
     }

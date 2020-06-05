@@ -52,13 +52,11 @@ public class FragmentInicio extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
-            Snackbar snack = Snackbar.make(getView(), R.string.emergency_message, Snackbar.LENGTH_INDEFINITE);
+            Snackbar snack = Snackbar.make(getView(), R.string.emergency_message, Snackbar.LENGTH_LONG);
             snack.setAction("OK", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Respond to the click, such as by undoing the modification that caused
-                    // this message to be displayed
-                    Toast.makeText(getContext(),"OK",Toast.LENGTH_SHORT).show();
+
                 }
             });
             snack.show();
@@ -96,7 +94,7 @@ public class FragmentInicio extends Fragment {
         Bundle fragment = new Bundle();
         fragment.putString("FRAGMENT",fragmentTipo);
         dialogoTipoUsuario.setArguments(fragment);
-        dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog_mapview");
+        dialogoTipoUsuario.show(getActivity().getSupportFragmentManager(), "error_dialog");
 
     }
 

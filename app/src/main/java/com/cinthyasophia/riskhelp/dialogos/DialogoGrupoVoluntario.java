@@ -2,6 +2,7 @@ package com.cinthyasophia.riskhelp.dialogos;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -92,6 +93,13 @@ public class DialogoGrupoVoluntario extends DialogFragment {
 
     }
 
+    //En caso de que se cierre el dialogo muestra el toast indicado
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        Toast.makeText(getActivity(),R.string.back_button,Toast.LENGTH_LONG).show();
+        super.onDismiss(dialog);
+    }
+
     /**
      * Se obtienen todos los usuarios voluntarios y se guardan en un ArrayList como grupos voluntarios.
      */
@@ -112,9 +120,6 @@ public class DialogoGrupoVoluntario extends DialogFragment {
                     if (gruposVoluntarios.size()==0){
                         Toast.makeText(getActivity(),R.string.group_error,Toast.LENGTH_LONG).show();
                         dismiss();
-
-                    }else{
-                        Toast.makeText(getActivity(),"Para salir presiona el boton de volver.",Toast.LENGTH_LONG).show();
 
                     }
                 } else {

@@ -25,7 +25,6 @@ import androidx.fragment.app.Fragment;
 
 import com.cinthyasophia.riskhelp.R;
 import com.cinthyasophia.riskhelp.dialogos.DialogoCambioPassword;
-import com.cinthyasophia.riskhelp.dialogos.DialogoGrupoVoluntario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,7 +115,7 @@ public class FragmentAjustes extends Fragment {
                             if (task.isSuccessful()) {
                                 Log.d("INFO", "FOTO GUARDADA.");
                                 Log.d("INFO", user.getPhotoUrl().toString());
-                                Toast.makeText(getContext(),"Foto cambiada con éxito!", Toast.LENGTH_SHORT);
+                                Toast.makeText(getContext(),R.string.Profile_change, Toast.LENGTH_SHORT);
                             }
                         }
                     });

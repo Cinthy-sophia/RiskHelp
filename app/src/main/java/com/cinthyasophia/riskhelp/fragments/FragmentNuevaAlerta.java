@@ -93,6 +93,7 @@ public class FragmentNuevaAlerta extends Fragment {
                 tfDireccion.setText("");
                 tfCodigoPostal.setText("");
                 tfTelefono.setText("");
+                cBAnonimo.setChecked(false);
                 getActivity().getSupportFragmentManager().beginTransaction().remove(FragmentNuevaAlerta.this).commit();
             }
         });
